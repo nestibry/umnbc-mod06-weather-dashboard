@@ -32,7 +32,7 @@ fetch(baseUrl)
 // Geocoding by City, (State), Country Code
 var city = "viroqua,Wisconsin,us";
 var limit = 100;
-var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
+var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
 console.log(geoUrl);
 
 var geoData = [];
@@ -49,7 +49,7 @@ fetch(geoUrl)
 // Geocoding by Zip Code
 var zipCode = 54621;
 var countryCode = "US";
-var zipUrl = `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+var zipUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
 console.log(zipUrl);
 
 var zipData = [];
