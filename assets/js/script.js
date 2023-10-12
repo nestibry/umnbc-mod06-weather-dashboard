@@ -8,6 +8,7 @@
         a. Map with radar
         b. 3-hour rows for each day
     3. Write jQuery code to dynamically update content
+        a. Need a form to confirm city,state,country (and a blank form error message)
 */
 
 // OpenWeather API
@@ -28,8 +29,8 @@ fetch(baseUrl)
     apiData = data;
 });
 
-// Geocoding
-var city = "minneapolis";
+// Geocoding by City, (State), Country Code
+var city = "viroqua,Wisconsin,us";
 var limit = 100;
 var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
 console.log(geoUrl);
@@ -44,3 +45,19 @@ fetch(geoUrl)
     geoData = data;
 });
 
+
+// Geocoding by Zip Code
+var zipCode = 54621;
+var countryCode = "US";
+var zipUrl = `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+console.log(zipUrl);
+
+var zipData = [];
+fetch(zipUrl)
+.then(function (response) {
+    return response.json();
+})
+.then(function (data) {
+    console.log(data);
+    zipData = data;
+});
