@@ -16,8 +16,8 @@ var baseUrl = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={l
 var lat = 44.932754; 
 var lon = -93.2225293;
 var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
 console.log(baseUrl);
+
 var apiData = [];
 fetch(baseUrl)
 .then(function (response) {
@@ -26,4 +26,21 @@ fetch(baseUrl)
 .then(function (data) {
     console.log(data);
     apiData = data;
+});
+
+// Geocoding
+var city = "minneapolis";
+var limit = 100;
+var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
+console.log(geoUrl);
+
+var geoData = [];
+fetch(geoUrl)
+.then(function (response) {
+    return response.json();
 })
+.then(function (data) {
+    console.log(data);
+    geoData = data;
+});
+
