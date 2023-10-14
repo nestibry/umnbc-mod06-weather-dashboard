@@ -66,11 +66,26 @@ fetch(baseUrl)
 .then(function (data) {
     console.log(data);
     apiData = data;
+
+    // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+    renderApiOutputs();
 });
 
 
-// Adding Data to HTML, need to uncomment the Test Script Sections in HTML
+function renderApiOutputs() {
+    // Adding Data to HTML, need to uncomment the Test Script Sections in HTML
+    var testApiSection = $(".test-api-section");
 
+    var cityEl = $('<h2>');
+    cityEl.text(apiData.city.name);
+    testApiSection.append(cityEl);
+
+    var coorinatesEl = $('<h4>');
+    coorinatesEl.text("< latitude: " + apiData.city.coord.lat + " longitude: " + apiData.city.coord.lon + " >");
+    testApiSection.append(coorinatesEl);
+
+
+}
 
 
 
