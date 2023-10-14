@@ -171,11 +171,19 @@ function renderApiOutputs() {
         testApiSection.append(visOutputsEl);
 
         // Weather Condition (all weather is an array of length 1)
+        // https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon 
+        var weatherIcon = apiData.list[i].weather[0].icon;
+        var iconUrl = `https://openweathermap.org./img/w/${weatherIcon}.png`;
+        // console.log(iconUrl);
         var weatherOutputsEl = $('<p>');
         weatherOutputsEl.text(`list.weather => .id: ${apiData.list[i].weather[0].id}  
                     --- .main: ${apiData.list[i].weather[0].main} 
                     --- .description: ${apiData.list[i].weather[0].description} 
-                    --- .icon: ${apiData.list[i].weather[0].icon}`);
+                    --- .icon: ${apiData.list[i].weather[0].icon}
+                    --- ICON:`);
+        var iconEl = $('<img>');
+        iconEl.attr('src', iconUrl);
+        weatherOutputsEl.append(iconEl);
         testApiSection.append(weatherOutputsEl);
 
         // Percent cloudiness
