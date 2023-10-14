@@ -280,7 +280,7 @@ function renderSavedLocations() {
     // Read the saved locations from localStorage
     var savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
     
-    // // Save locations to localStorage if it is a new search location
+    // Save newLocation to localStorage if it is a new search location
     var isNotPresent =  (savedLocations.filter(savedLocations => savedLocations.id == newLocation.id).length === 0);
     console.log(isNotPresent);
     if(isNotPresent){
@@ -288,10 +288,24 @@ function renderSavedLocations() {
         savedLocations.push(newLocation);
         localStorage.setItem('WeatherDashboardLocations', JSON.stringify(savedLocations))
     }
-    // savedLocations.push(newLocation);
+    
+    // Re-render the Saved Locations dropdown menu
+    // Clear the dropdownMenuEl to get ready for the new rendering
+    var dropdownMenuEl = $(".dropdown-menu");
+    for(var j = (dropdownMenuEl.children().length - 1); j >= 0; j--) {
+        dropdownMenuEl.children().eq(j).remove();
+    }
 
-    // Save locations to localStorage
-    // localStorage.setItem('WeatherDashboardLocations', JSON.stringify(savedLocations))
+    var listEl = $('<li>');
+    var anchorEl = $('<a>');
+    anchorEl.addClass('dropdown-item');
+    anchorEl.attr('href', '#');
+    anchorEl.text(newLocation.name);
+    listEl.append(anchorEl);
+    dropdownMenuEl.append(listEl);
+
+
+
 
 }
 
