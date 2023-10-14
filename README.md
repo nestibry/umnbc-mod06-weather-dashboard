@@ -29,7 +29,7 @@ N/A
     jQuery: ./assets/js/test-api.js
 
 #### Figure: Weather Dashboard Example
-![Weather Dashboard Example](./assets/images/weather-dashboard-example.png)
+![Weather Dashboard Example](./assets/images/weather-dashboard-example-new.png)
  
 ## Credits
 - [Day.js](https://day.js.org/en/)
