@@ -20,6 +20,7 @@ var zipData = [];
 var apiData = [];
 var forecastData = [];
 var testApiSection = $(".test-api-section");
+var dropdownMenuEl = $(".dropdown-menu");
 
 // Add newLocation to the savedLocations
 let newLocation = {
@@ -291,7 +292,7 @@ function renderSavedLocations() {
     
     // Re-render the Saved Locations dropdown menu
     // Clear the dropdownMenuEl to get ready for the new rendering
-    var dropdownMenuEl = $(".dropdown-menu");
+    // var dropdownMenuEl = $(".dropdown-menu");
     for(var j = (dropdownMenuEl.children().length - 1); j >= 0; j--) {
         dropdownMenuEl.children().eq(j).remove();
     }
@@ -302,11 +303,14 @@ function renderSavedLocations() {
         var anchorEl = $('<a>');
         anchorEl.addClass('dropdown-item');
         anchorEl.attr('href', '#');
+        anchorEl.attr('data-location-lat', savedLocations[i].lat);
+        anchorEl.attr('data-location-lon', savedLocations[i].lon);
         anchorEl.text(savedLocations[i].name);
         listEl.append(anchorEl);
         dropdownMenuEl.append(listEl);
     }
 }
+renderSavedLocations();
 
 
 // Location Search
@@ -394,6 +398,45 @@ locationSearchEl.on('submit', function(event){
 
 });
 
+
+
+// Location Search from dropdown
+var eventInput = "";
+var parentEl = "";
+
+dropdownMenuEl.on('click', '.dropdown-item', function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+
+    // User input location, City or Zipcode
+    eventInput = $(this);
+    var lat = eventInput.attr('data-location-lat');
+    console.log(lat);
+    var lon = eventInput.attr('data-location-lon');
+    console.log(lon);
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    var units = "imperial";
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+    console.log(forecastUrl);
+
+    fetch(forecastUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log('Forecast Data:');
+        console.log(data);
+        apiData = data;
+
+        // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+        renderApiOutputs();
+
+    });
+
+    
+});
 
 
 
