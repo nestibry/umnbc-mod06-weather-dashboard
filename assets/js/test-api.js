@@ -23,34 +23,34 @@ var limit = 100;
 var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
 console.log(geoUrl);
 
-fetch(geoUrl)
-.then(function (response) {
-    return response.json();
-})
-.then(function (data) {
-    console.log(data);
-    geoData = data[0];
+// fetch(geoUrl)
+// .then(function (response) {
+//     return response.json();
+// })
+// .then(function (data) {
+//     console.log(data);
+//     geoData = data[0];
 
-    // OpenWeather API 5-day/3-hour Weather Forecasting
-    var lat = geoData.lat; 
-    var lon = geoData.lon;
-    var units = "imperial"
-    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-    console.log(baseUrl);
+//     // OpenWeather API 5-day/3-hour Weather Forecasting
+//     var lat = geoData.lat; 
+//     var lon = geoData.lon;
+//     var units = "imperial"
+//     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+//     console.log(baseUrl);
 
-    fetch(baseUrl)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-        apiData = data;
+//     fetch(baseUrl)
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         console.log(data);
+//         apiData = data;
 
-        // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
-        renderApiOutputs();
-    });
+//         // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+//         renderApiOutputs();
+//     });
 
-});
+// });
 
 
 // Geocoding by Zip Code
@@ -66,6 +66,25 @@ fetch(zipUrl)
 .then(function (data) {
     console.log(data);
     zipData = data;
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    var lat = zipData.lat; 
+    var lon = zipData.lon;
+    var units = "imperial"
+    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+    console.log(baseUrl);
+
+    fetch(baseUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        apiData = data;
+
+        // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+        renderApiOutputs();
+    });
 });
 
 
