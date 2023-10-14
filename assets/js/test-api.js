@@ -21,13 +21,36 @@ var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${li
 console.log(geoUrl);
 
 var geoData = [];
+var apiData = [];
+
 fetch(geoUrl)
 .then(function (response) {
     return response.json();
 })
 .then(function (data) {
     console.log(data);
-    geoData = data;
+    geoData = data[0];
+
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    var lat = geoData.lat; 
+    var lon = geoData.lon;
+    var units = "imperial"
+    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+    console.log(baseUrl);
+
+    fetch(baseUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        apiData = data;
+
+        // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+        renderApiOutputs();
+    });
+
 });
 
 
@@ -49,27 +72,27 @@ fetch(zipUrl)
 });
 
 
-// OpenWeather API 5-day/3-hour Weather Forecasting
-var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
-var baseUrl = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
-var lat = 44.932754; 
-var lon = -93.2225293;
-var units = "imperial"
-var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-console.log(baseUrl);
+// // OpenWeather API 5-day/3-hour Weather Forecasting
+// var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
+// var baseUrl = "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
+// var lat = 44.932754; 
+// var lon = -93.2225293;
+// var units = "imperial"
+// var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+// console.log(baseUrl);
 
-var apiData = [];
-fetch(baseUrl)
-.then(function (response) {
-    return response.json();
-})
-.then(function (data) {
-    console.log(data);
-    apiData = data;
+// var apiData = [];
+// fetch(baseUrl)
+// .then(function (response) {
+//     return response.json();
+// })
+// .then(function (data) {
+//     console.log(data);
+//     apiData = data;
 
-    // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
-    renderApiOutputs();
-});
+//     // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+//     renderApiOutputs();
+// });
 
 
 function renderApiOutputs() {
