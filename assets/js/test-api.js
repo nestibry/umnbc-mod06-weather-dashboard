@@ -19,6 +19,7 @@ var geoData = [];
 var zipData = [];
 var apiData = [];
 var forecastData = [];
+var testApiSection = $(".test-api-section");
 
 
 // Geocoding by City, (State), Country Code
@@ -116,8 +117,14 @@ fetch(zipUrl)
 
 
 function renderApiOutputs() {
+      
     // Adding Data to HTML, need to uncomment the Test Script Sections in HTML
     var testApiSection = $(".test-api-section");
+
+    // Clear the testApiSection to get ready for the new rendering
+    for(var j = (testApiSection.children().length - 1); j > 0; j--) {
+        testApiSection.children().eq(j).remove();
+    }
 
     var cityEl = $('<h2>');
     cityEl.text(apiData.city.name);
