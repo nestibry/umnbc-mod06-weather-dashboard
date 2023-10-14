@@ -68,7 +68,7 @@ console.log(geoUrl);
 
 
 // Geocoding by Zip Code
-var zipCode = 54621;
+var zipCode = 55406;
 // var countryCode = "US";
 var zipUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
 console.log(zipUrl);
