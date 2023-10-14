@@ -81,8 +81,8 @@ function renderApiOutputs() {
     testApiSection.append(cityEl);
 
     var dateEl = $('<h4>');
-    var todayDate = dayjs().format("dddd, MMMM D, YYYY");
-    dateEl.text(todayDate);
+    var currDateTime = dayjs().format("dddd, MMMM D, YYYY => HH:mm");
+    dateEl.text(`Current Time: ${currDateTime}`);
     testApiSection.append(dateEl);
 
     var coorinatesEl = $('<h5>');
@@ -103,18 +103,106 @@ function renderApiOutputs() {
     forecastHeaderEl.text("Forecasts");
     testApiSection.append(forecastHeaderEl);
 
-    var forecastTimeEl = $('<h4>');
-    var forecastTime = dayjs.unix(apiData.list[0].dt).format("dddd, YYYY-MM-DD, HH:mm");
-    forecastTimeEl.text(forecastTime);
-    testApiSection.append(forecastTimeEl);
+    for(var i = 0; i < apiData.list.length; i++){
 
-    var mainEl = $('<h5>');
-    var popEl = $('<h5>');      // Probability of Precipitation [0:1]
-    var visibilityEl = $('<h5>'); // Visibility [0:10000m]
-    var weatherEl = $('<h5>'); // Weather Condition
-    var cloudsEl = $('<h5>'); // Percent cloudiness
-    var windEl = $('<h5>'); // Wind
-    
+        // Forecast Time
+        var forecastTimeEl = $('<h4>');
+        var forecastTime = dayjs.unix(apiData.list[i].dt).format("dddd, YYYY-MM-DD, HH:mm");
+        forecastTimeEl.text(forecastTime);
+        testApiSection.append(forecastTimeEl);
+
+        // main condition outputs
+        var mainOutputsEl = $('<p>');
+        mainOutputsEl.text(`list.main => .temp: ${apiData.list[i].main.temp} \xB0F 
+                    --- .feels_like: ${apiData.list[i].main.feels_like} \xB0F
+                    --- .temp_min: ${apiData.list[i].main.temp_min} \xB0F
+                    --- .temp_max: ${apiData.list[i].main.temp_max} \xB0F
+                    --- .pressure: ${apiData.list[i].main.pressure} hPa
+                    --- .humidity: ${apiData.list[i].main.humidity} %`);
+        testApiSection.append(mainOutputsEl);
+
+        // Probability of Precipitation [0:1]
+        var popOutputsEl = $('<p>');
+        popOutputsEl.text(`list => .pop: ${apiData.list[i].pop * 100} % (probability of precipitation)`);
+        testApiSection.append(popOutputsEl);
+
+        // Visibility [0:10000m]
+        var visOutputsEl = $('<p>');
+        visOutputsEl.text(`list => .visibility: ${apiData.list[i].visibility / 1000} km`);
+        testApiSection.append(visOutputsEl);
+
+        // Weather Condition (all weather is an array of length 1)
+        var weatherOutputsEl = $('<p>');
+        weatherOutputsEl.text(`list.weather => .id: ${apiData.list[i].weather[0].id}  
+                    --- .main: ${apiData.list[i].weather[0].main} 
+                    --- .description: ${apiData.list[i].weather[0].description} 
+                    --- .icon: ${apiData.list[i].weather[0].icon}`);
+        testApiSection.append(weatherOutputsEl);
+
+        // Percent cloudiness
+        var cloudsEl = $('<p>');
+        cloudsEl.text(`list.clouds => .all: ${apiData.list[i].clouds.all} % cloudiness`);
+        testApiSection.append(cloudsEl);
+
+
+        // Wind
+        var windEl = $('<p>');
+        windEl.text(`list.wind => .speed: ${apiData.list[i].wind.speed} mph  
+                    --- .deg: ${apiData.list[i].wind.deg} \xB0 (direction)
+                    --- .gust: ${apiData.list[i].wind.gust} mph`);
+        testApiSection.append(windEl);
+
+
+    }
+
+
+    // // Forecast Time
+    // var forecastTimeEl = $('<h4>');
+    // var forecastTime = dayjs.unix(apiData.list[0].dt).format("dddd, YYYY-MM-DD, HH:mm");
+    // forecastTimeEl.text(forecastTime);
+    // testApiSection.append(forecastTimeEl);
+
+    // // main condition outputs
+    // var mainOutputsEl = $('<p>');
+    // mainOutputsEl.text(`list.main => .temp: ${apiData.list[0].main.temp} \xB0F 
+    //             --- .feels_like: ${apiData.list[0].main.feels_like} \xB0F
+    //             --- .temp_min: ${apiData.list[0].main.temp_min} \xB0F
+    //             --- .temp_max: ${apiData.list[0].main.temp_max} \xB0F
+    //             --- .pressure: ${apiData.list[0].main.pressure} hPa
+    //             --- .humidity: ${apiData.list[0].main.humidity} %`);
+    // testApiSection.append(mainOutputsEl);
+
+    // // Probability of Precipitation [0:1]
+    // var popOutputsEl = $('<p>');
+    // popOutputsEl.text(`list => .pop: ${apiData.list[0].pop * 100} % (probability of precipitation)`);
+    // testApiSection.append(popOutputsEl);
+
+    // // Visibility [0:10000m]
+    // var visOutputsEl = $('<p>');
+    // visOutputsEl.text(`list => .visibility: ${apiData.list[0].visibility / 1000} km`);
+    // testApiSection.append(visOutputsEl);
+
+    // // Weather Condition (all weather is an array of length 1)
+    // var weatherOutputsEl = $('<p>');
+    // weatherOutputsEl.text(`list.weather => .id: ${apiData.list[0].weather[0].id}  
+    //             --- .main: ${apiData.list[0].weather[0].main} 
+    //             --- .description: ${apiData.list[0].weather[0].description} 
+    //             --- .icon: ${apiData.list[0].weather[0].icon}`);
+    // testApiSection.append(weatherOutputsEl);
+
+    // // Percent cloudiness
+    // var cloudsEl = $('<p>');
+    // cloudsEl.text(`list.clouds => .all: ${apiData.list[0].clouds.all} % cloudiness`);
+    // testApiSection.append(cloudsEl);
+
+
+    // // Wind
+    // var windEl = $('<p>');
+    // windEl.text(`list.wind => .speed: ${apiData.list[0].wind.speed} mph  
+    //             --- .deg: ${apiData.list[0].wind.deg} \xB0 (direction)
+    //             --- .gust: ${apiData.list[0].wind.gust} mph`);
+    // testApiSection.append(windEl);
+
 
 
 }
