@@ -257,4 +257,28 @@ function renderApiOutputs() {
 
 
 
+// Location Search
+var locationSearch = "";
+var locationSearchEl = $('#location-search');
+var locationInputEl = $('#location-input');
+
+
+
+locationSearchEl.on('submit', function(event){
+    
+    event.preventDefault();
+
+    var locationInput = locationInputEl.val();
+
+    console.log(locationInput);
+
+
+
+});
+
+
+
+
+
+
 
