@@ -11,17 +11,17 @@
         a. Need a form to confirm city,state,country (and a blank form error message)
 */
 
-
+// Global Variables
+var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
+var geoData = [];
+var zipData = [];
+var apiData = [];
 
 // Geocoding by City, (State), Country Code
-var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
-var city = "viroqua,Wisconsin,us";
+var city = "chaseburg,wisconsin,us";
 var limit = 100;
 var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=${limit}&appid=${apiKey}`;
 console.log(geoUrl);
-
-var geoData = [];
-var apiData = [];
 
 fetch(geoUrl)
 .then(function (response) {
@@ -30,7 +30,6 @@ fetch(geoUrl)
 .then(function (data) {
     console.log(data);
     geoData = data[0];
-
 
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var lat = geoData.lat; 
@@ -55,13 +54,11 @@ fetch(geoUrl)
 
 
 // Geocoding by Zip Code
-var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
 var zipCode = 54621;
 var countryCode = "US";
 var zipUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
 console.log(zipUrl);
 
-var zipData = [];
 fetch(zipUrl)
 .then(function (response) {
     return response.json();
