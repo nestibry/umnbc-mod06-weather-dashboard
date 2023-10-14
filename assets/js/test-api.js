@@ -21,6 +21,14 @@ var apiData = [];
 var forecastData = [];
 var testApiSection = $(".test-api-section");
 
+// Add newLocation to the savedLocations
+let newLocation = {
+    id: "",
+    name: "",
+    lat: "",
+    lon: ""
+}
+
 
 // Geocoding by City, (State), Country Code
 var city = "chaseburg,wisconsin,us";
@@ -267,6 +275,19 @@ function renderApiOutputs() {
 
 
 
+function renderSavedLocations() {
+
+    // Read the saved locations from localStorage
+    var savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+    
+    // Add newLocation to savedLocations
+    savedLocations.push(newLocation);
+
+    // Save locations to localStorage
+    localStorage.setItem('savedLocations', JSON.stringify(savedLocations))
+
+}
+
 
 // Location Search
 var locationInput = "";
@@ -337,13 +358,15 @@ locationSearchEl.on('submit', function(event){
             renderApiOutputs();
 
             // Save to localStorage for "Saved Locations"
-            var newLocation = {
+            newLocation = {
                 id: data.city.id,
                 name: data.city.name,
-                lat: data.city.lat,
-                lon: data.city.lon
+                lat: data.city.coord.lat,
+                lon: data.city.coord.lon
             }
-            renderSavedLocations(newLocation);
+            console.log('New Location:');
+            console.log(newLocation);
+            renderSavedLocations();
 
         });
     });
