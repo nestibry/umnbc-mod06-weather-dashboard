@@ -278,13 +278,20 @@ function renderApiOutputs() {
 function renderSavedLocations() {
 
     // Read the saved locations from localStorage
-    var savedLocations = JSON.parse(localStorage.getItem('savedLocations')) || [];
+    var savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
     
-    // Add newLocation to savedLocations
-    savedLocations.push(newLocation);
+    // // Save locations to localStorage if it is a new search location
+    var isNotPresent =  (savedLocations.filter(savedLocations => savedLocations.id == newLocation.id).length === 0);
+    console.log(isNotPresent);
+    if(isNotPresent){
+        console.log("Is not in local storage");
+        savedLocations.push(newLocation);
+        localStorage.setItem('WeatherDashboardLocations', JSON.stringify(savedLocations))
+    }
+    // savedLocations.push(newLocation);
 
     // Save locations to localStorage
-    localStorage.setItem('savedLocations', JSON.stringify(savedLocations))
+    // localStorage.setItem('WeatherDashboardLocations', JSON.stringify(savedLocations))
 
 }
 
