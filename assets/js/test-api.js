@@ -296,17 +296,16 @@ function renderSavedLocations() {
         dropdownMenuEl.children().eq(j).remove();
     }
 
-    var listEl = $('<li>');
-    var anchorEl = $('<a>');
-    anchorEl.addClass('dropdown-item');
-    anchorEl.attr('href', '#');
-    anchorEl.text(newLocation.name);
-    listEl.append(anchorEl);
-    dropdownMenuEl.append(listEl);
-
-
-
-
+    // Iterates over all the savedLocations to add to the dropdown menu
+    for(var i = 0; i < savedLocations.length; i++){
+        var listEl = $('<li>');
+        var anchorEl = $('<a>');
+        anchorEl.addClass('dropdown-item');
+        anchorEl.attr('href', '#');
+        anchorEl.text(savedLocations[i].name);
+        listEl.append(anchorEl);
+        dropdownMenuEl.append(listEl);
+    }
 }
 
 
