@@ -80,9 +80,20 @@ function renderApiOutputs() {
     cityEl.text(apiData.city.name);
     testApiSection.append(cityEl);
 
+    var dateEl = $('<h4>');
+    var todayDate = dayjs().format("dddd, MMMM D, YYYY");
+    dateEl.text(todayDate);
+    testApiSection.append(dateEl);
+
     var coorinatesEl = $('<h4>');
-    coorinatesEl.text("< latitude: " + apiData.city.coord.lat + " longitude: " + apiData.city.coord.lon + " >");
+    coorinatesEl.text("< latitude: " + apiData.city.coord.lat + ", longitude: " + apiData.city.coord.lon + " >");
     testApiSection.append(coorinatesEl);
+
+    var sunRiseSetEl = $('<h4>');
+    var sunrise = dayjs.unix(apiData.city.sunrise).format('HH:mm:ss');
+    var sunset = dayjs.unix(apiData.city.sunset).format('HH:mm:ss');
+    sunRiseSetEl.text("< sunrise: " + sunrise + " sunset: " + sunset + " >");
+    testApiSection.append(sunRiseSetEl);
 
 
 }
