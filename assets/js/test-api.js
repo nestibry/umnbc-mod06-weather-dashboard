@@ -335,6 +335,16 @@ locationSearchEl.on('submit', function(event){
 
             // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
             renderApiOutputs();
+
+            // Save to localStorage for "Saved Locations"
+            var newLocation = {
+                id: data.city.id,
+                name: data.city.name,
+                lat: data.city.lat,
+                lon: data.city.lon
+            }
+            renderSavedLocations(newLocation);
+
         });
     });
 
