@@ -20,6 +20,15 @@ var zipData = [];
 var apiData = [];
 var forecastData = [];
 var testApiSection = $(".test-api-section");
+var dropdownMenuEl = $(".dropdown-menu");
+
+// Add newLocation to the savedLocations
+let newLocation = {
+    id: "",
+    name: "",
+    lat: "",
+    lon: ""
+}
 
 
 // Geocoding by City, (State), Country Code
@@ -59,7 +68,7 @@ console.log(geoUrl);
 
 
 // Geocoding by Zip Code
-var zipCode = 54621;
+var zipCode = 55406;
 // var countryCode = "US";
 var zipUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
 console.log(zipUrl);
@@ -267,6 +276,42 @@ function renderApiOutputs() {
 
 
 
+function renderSavedLocations() {
+
+    // Read the saved locations from localStorage
+    var savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
+    
+    // Save newLocation to localStorage if it is a new search location
+    var isNotPresent =  (savedLocations.filter(savedLocations => savedLocations.id == newLocation.id).length === 0);
+    console.log(isNotPresent);
+    if(isNotPresent){
+        console.log("Is not in local storage");
+        savedLocations.push(newLocation);
+        localStorage.setItem('WeatherDashboardLocations', JSON.stringify(savedLocations))
+    }
+    
+    // Re-render the Saved Locations dropdown menu
+    // Clear the dropdownMenuEl to get ready for the new rendering
+    // var dropdownMenuEl = $(".dropdown-menu");
+    for(var j = (dropdownMenuEl.children().length - 1); j >= 0; j--) {
+        dropdownMenuEl.children().eq(j).remove();
+    }
+
+    // Iterates over all the savedLocations to add to the dropdown menu
+    for(var i = 0; i < savedLocations.length; i++){
+        var listEl = $('<li>');
+        var anchorEl = $('<a>');
+        anchorEl.addClass('dropdown-item');
+        anchorEl.attr('href', '#');
+        anchorEl.attr('data-location-lat', savedLocations[i].lat);
+        anchorEl.attr('data-location-lon', savedLocations[i].lon);
+        anchorEl.text(savedLocations[i].name);
+        listEl.append(anchorEl);
+        dropdownMenuEl.append(listEl);
+    }
+}
+renderSavedLocations();
+
 
 // Location Search
 var locationInput = "";
@@ -335,12 +380,63 @@ locationSearchEl.on('submit', function(event){
 
             // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
             renderApiOutputs();
+
+            // Save to localStorage for "Saved Locations"
+            newLocation = {
+                id: data.city.id,
+                name: data.city.name,
+                lat: data.city.coord.lat,
+                lon: data.city.coord.lon
+            }
+            console.log('New Location:');
+            console.log(newLocation);
+            renderSavedLocations();
+
         });
     });
 
 
 });
 
+
+
+// Location Search from dropdown
+var eventInput = "";
+var parentEl = "";
+
+dropdownMenuEl.on('click', '.dropdown-item', function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+
+    // User input location, City or Zipcode
+    eventInput = $(this);
+    var lat = eventInput.attr('data-location-lat');
+    console.log(lat);
+    var lon = eventInput.attr('data-location-lon');
+    console.log(lon);
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    var units = "imperial";
+    var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+    console.log(forecastUrl);
+
+    fetch(forecastUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log('Forecast Data:');
+        console.log(data);
+        apiData = data;
+
+        // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
+        renderApiOutputs();
+
+    });
+
+    
+});
 
 
 
