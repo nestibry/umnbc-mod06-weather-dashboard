@@ -85,15 +85,36 @@ function renderApiOutputs() {
     dateEl.text(todayDate);
     testApiSection.append(dateEl);
 
-    var coorinatesEl = $('<h4>');
+    var coorinatesEl = $('<h5>');
     coorinatesEl.text("< latitude: " + apiData.city.coord.lat + ", longitude: " + apiData.city.coord.lon + " >");
     testApiSection.append(coorinatesEl);
 
-    var sunRiseSetEl = $('<h4>');
+    var sunRiseSetEl = $('<h5>');
     var sunrise = dayjs.unix(apiData.city.sunrise).format('HH:mm:ss');
     var sunset = dayjs.unix(apiData.city.sunset).format('HH:mm:ss');
     sunRiseSetEl.text("< sunrise: " + sunrise + " sunset: " + sunset + " >");
     testApiSection.append(sunRiseSetEl);
+
+    var blankEl = $('<p>');
+    blankEl.text("");
+    testApiSection.append(blankEl);
+
+    var forecastHeaderEl = $('<h2>');
+    forecastHeaderEl.text("Forecasts");
+    testApiSection.append(forecastHeaderEl);
+
+    var forecastTimeEl = $('<h4>');
+    var forecastTime = dayjs.unix(apiData.list[0].dt).format("dddd, YYYY-MM-DD, HH:mm");
+    forecastTimeEl.text(forecastTime);
+    testApiSection.append(forecastTimeEl);
+
+    var mainEl = $('<h5>');
+    var popEl = $('<h5>');      // Probability of Precipitation [0:1]
+    var visibilityEl = $('<h5>'); // Visibility [0:10000m]
+    var weatherEl = $('<h5>'); // Weather Condition
+    var cloudsEl = $('<h5>'); // Percent cloudiness
+    var windEl = $('<h5>'); // Wind
+    
 
 
 }
