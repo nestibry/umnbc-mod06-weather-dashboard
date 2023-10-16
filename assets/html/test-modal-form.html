@@ -48,7 +48,7 @@
                     </ul>
                     <form id="location-search" class="d-flex ms-auto col-lg-4">
                         <input id="location-input" class="form-control me-2" type="search" placeholder="City OR Zipcode" aria-label="Search">
-                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" data-bs-toggle="modal" data-bs-target="#new-project-modal">Search</button>
                     </form>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <li class="list-group-item">Due Date</li>
             </ul>
             <div class="card-footer">
-                <button class="btn btn-block btn-custom w-100" data-bs-toggle="modal" data-bs-target="#new-project-modal">Add Project</button>
+                <!-- <button class="btn btn-block btn-custom w-100" data-bs-toggle="modal" data-bs-target="#new-project-modal">Add Project</button> -->
           </div>
         </div>
     </div>
@@ -91,16 +91,12 @@
                         </div> -->
                         <div class="mb-3">
                             <label for="project-type-input" class="form-label">City</label>
-                            <select id="project-type-input" class="form-select">
+                            <select id="project-type-input" class="form-select" required>
                                 <option value="Minneapolis, Minnesota, US">Minneapolis, Minnesota, US</option>
                                 <option value="Chaseburg, Wisconsin, US">Chaseburg, Wisconsin, US</option>
                                 <option value="Duluth, Minnesota, US">Duluth, Minnesota, US</option>
                             </select>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label for="project-date-input">Due Date</label>
-                            <input type="date" id="project-date-input" class="form-control" required/>
-                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <!-- The data-bs-dismiss attribute tells Bootstrap to hide the <div class="modal-footer"> element on click. -->
