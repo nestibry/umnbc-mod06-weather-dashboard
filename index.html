@@ -57,6 +57,72 @@
     </div>
     
     
+    <!-- Testing a Modal Form  -->
+    <div class="col-md col-xl-4">
+        <!-- Add project form and instructions -->
+        <div class="card mb-3">
+            <h2 class="h4 card-header custom-card-header">Instructions</h2>
+            <div class="card-body">
+                <p class="card-text">Click the button below to open a form and provide information for the following:</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Project Name</li>
+                <li class="list-group-item">Project Type</li>
+                <li class="list-group-item">Due Date</li>
+            </ul>
+            <div class="card-footer">
+                <button class="btn btn-block btn-custom w-100" data-bs-toggle="modal" data-bs-target="#new-project-modal">Add Project</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding a new project -->
+    <div class="modal fade" id="new-project-modal" tabindex="-1" aria-labelledby="new-project-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="project-form">
+                    <div class="modal-header custom-modal-header">
+                        <h5 class="modal-title" id="new-project-modal-label">Add a new project</h5>
+                        <button
+                            type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="project-name-input">Project Name</label>
+                            <input type="text" id="project-name-input" class="form-control" placeholder="Enter the project's name" required/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="project-type-input" class="form-label">Project Type</label>
+                            <select id="project-type-input" class="form-select">
+                                <option value="Web Application (Front End)">Web Application (Front End)</option>
+                                <option value="Web Application (Back End)">Web Application (Back End)</option>
+                                <option value="Web Application (Full Stack)">Web Application (Full Stack)</option>
+                                <option value="Mobile Application">Mobile Application</option>
+                                <option value="Print Campaign">Print Campaign</option>
+                                <option value="Digital Marketing Campaign">Digital Marketing Campaign</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="project-date-input">Due Date</label>
+                            <input type="date" id="project-date-input" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- The data-bs-dismiss attribute tells Bootstrap to hide the <div class="modal-footer"> element on click. -->
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-custom" data-bs-dismiss="modal">Add Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+  </div>
+
+
+
     <!-- Current Weather  -->
     <!-- <section class="container my-5">
         <h1>City Name</h1>
