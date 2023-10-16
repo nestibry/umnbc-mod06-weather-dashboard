@@ -7,7 +7,16 @@ var forecastData = [];
 var locationInput = "";
 var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
+var projectTypeInputEl = $('#project-type-input');
+var projectFormEl = $('#project-form');
 
+
+projectFormEl.on('submit', function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(projectTypeInputEl.val());
+});
 
 
 locationSearchEl.on('submit', function(event){
