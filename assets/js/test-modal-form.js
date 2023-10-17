@@ -11,11 +11,34 @@ var projectTypeInputEl = $('#project-type-input');
 var projectFormEl = $('#project-form');
 
 
+
+
+function renderLocationForm(geodata) {
+
+    // Clear the testApiSection to get ready for the new rendering
+    for(var j = (projectTypeInputEl.children().length - 1); j >=0; j--) {
+        projectTypeInputEl.children().eq(j).remove();
+    }
+
+
+    for(var i = 0; i < geodata.length; i++) {
+        var locationOptionEl = $('<option>');
+        locationOptionEl.val(geodata[i].name + ", " + geodata[i].state + ", " + geodata[i].country);
+        locationOptionEl.text(geodata[i].name + ", " + geodata[i].state + ", " + geodata[i].country);
+        projectTypeInputEl.append(locationOptionEl);
+    }
+
+
+}
+
 projectFormEl.on('submit', function(event){
     
     event.preventDefault();
     event.stopPropagation();
     console.log(projectTypeInputEl.val());
+
+
+
 });
 
 
@@ -40,6 +63,8 @@ locationSearchEl.on('submit', function(event){
     .then(function (data) {
         console.log(data);
         geoData = data;
+
+        renderLocationForm(geoData);
 
         //     // // OpenWeather API 5-day/3-hour Weather Forecasting
         //     // var lat = geoData.lat; 
