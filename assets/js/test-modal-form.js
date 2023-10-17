@@ -1,5 +1,6 @@
 // Global Variables
 var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
+var units = "imperial";
 var geoData = [];
 var forecastData = [];
 
@@ -13,6 +14,26 @@ var projectFormEl = $('#project-form');
 
 
 
+function getWeatherForecast(locationCoords = "lat=43.6569157&lon=-90.8542977" ) {
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
+    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=${units}&appid=${apiKey}`;
+    console.log(baseUrl);
+
+    fetch(baseUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        forecastData = data;
+    });
+}
+
+
+
+
 function renderLocationForm(geodata) {
 
     // Clear the testApiSection to get ready for the new rendering
@@ -20,28 +41,42 @@ function renderLocationForm(geodata) {
         projectTypeInputEl.children().eq(j).remove();
     }
 
-
+    // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
     for(var i = 0; i < geodata.length; i++) {
         var locationOptionEl = $('<option>');
-        locationOptionEl.val(geodata[i].name + ", " + geodata[i].state + ", " + geodata[i].country);
-        locationOptionEl.text(geodata[i].name + ", " + geodata[i].state + ", " + geodata[i].country);
+        locationOptionEl.addClass('weather-location');
+        locationOptionEl.val(`lat=${geodata[i].lat}&lon=${geodata[i].lon}`);
+        if(geodata[i].country === "US"){
+            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].state}, ${geodata[i].country}`);
+        } else {
+            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].country}`);
+        }
         projectTypeInputEl.append(locationOptionEl);
     }
-
-
 }
 
 
+
+var locationSelected = "";
+var citySelected = "";
+var elementSelected = "";
 
 projectFormEl.on('submit', function(event){
     
     event.preventDefault();
     event.stopPropagation();
-    console.log(projectTypeInputEl.val());
-
-
+    elementSelected = projectTypeInputEl;
+    locationSelected = projectTypeInputEl.val();
+    citySelected = projectTypeInputEl.text();
+    // locationSelected = $(this).val();
+    // citySelected = $(this).text();
+    console.log(elementSelected);
+    console.log(citySelected);
+    console.log(locationSelected);
+    // getWeatherForecast();
 
 });
+
 
 
 locationSearchEl.on('submit', function(event){
@@ -65,27 +100,6 @@ locationSearchEl.on('submit', function(event){
     .then(function (data) {
         console.log(data);
         geoData = data;
-
-        
         renderLocationForm(geoData);
-
-        //     // // OpenWeather API 5-day/3-hour Weather Forecasting
-        //     // var lat = geoData.lat; 
-        //     // var lon = geoData.lon;
-        //     // var units = "imperial"
-        //     // var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-        //     // console.log(baseUrl);
-
-        //     // fetch(baseUrl)
-        //     // .then(function (response) {
-        //     //     return response.json();
-        //     // })
-        //     // .then(function (data) {
-        //     //     console.log(data);
-        //     //     forecastData = data;
-        //     // });
-
     });
-
-
 });
