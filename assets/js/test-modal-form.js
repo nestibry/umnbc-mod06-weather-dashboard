@@ -12,9 +12,9 @@ var projectTypeInputEl = $('#project-type-input');
 var projectFormEl = $('#project-form');
 
 
+// Nostalgic Camping Spot, Kearney, Nebraska, US lat: 40.6995, lon: -99.0819
 
-
-function getWeatherForecast(locationCoords = "lat=43.6569157&lon=-90.8542977" ) {
+function getWeatherForecast(locationCoords = "lat=40.6995&lon=-99.0819" ) {
 
     // OpenWeather API 5-day/3-hour Weather Forecasting
     // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
