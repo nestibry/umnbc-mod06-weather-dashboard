@@ -37,9 +37,10 @@ function getWeatherForecast(locationCoords = "lat=43.6569157&lon=-90.8542977" ) 
 function renderLocationForm(geodata) {
 
     // Clear the testApiSection to get ready for the new rendering
-    for(var j = (projectTypeInputEl.children().length - 1); j >=0; j--) {
-        projectTypeInputEl.children().eq(j).remove();
-    }
+    // for(var j = (projectTypeInputEl.children().length - 1); j >=0; j--) {
+    //     projectTypeInputEl.children().eq(j).remove();
+    // }
+    projectTypeInputEl.empty();
 
     // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
     for(var i = 0; i < geodata.length; i++) {
@@ -48,8 +49,10 @@ function renderLocationForm(geodata) {
         locationOptionEl.val(`lat=${geodata[i].lat}&lon=${geodata[i].lon}`);
         if(geodata[i].country === "US"){
             locationOptionEl.text(`${geodata[i].name}, ${geodata[i].state}, ${geodata[i].country}`);
+            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].state}-${geodata[i].country}`);
         } else {
             locationOptionEl.text(`${geodata[i].name}, ${geodata[i].country}`);
+            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].country}`);
         }
         projectTypeInputEl.append(locationOptionEl);
     }
@@ -74,6 +77,8 @@ projectFormEl.on('submit', function(event){
     console.log(citySelected);
     console.log(locationSelected);
     // getWeatherForecast();
+    var selectedLocation = $("#project-type-input option:selected").text();
+    console.log(selectedLocation);
 
 });
 
