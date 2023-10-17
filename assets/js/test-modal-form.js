@@ -63,22 +63,18 @@ function renderLocationForm(geodata) {
 var locationSelected = "";
 var citySelected = "";
 var elementSelected = "";
+// var selectedCoords = "";
+// var selectedCity = "";
 
 projectFormEl.on('submit', function(event){
     
     event.preventDefault();
     event.stopPropagation();
-    elementSelected = projectTypeInputEl;
-    locationSelected = projectTypeInputEl.val();
-    citySelected = projectTypeInputEl.text();
-    // locationSelected = $(this).val();
-    // citySelected = $(this).text();
-    console.log(elementSelected);
-    console.log(citySelected);
-    console.log(locationSelected);
-    // getWeatherForecast();
-    var selectedLocation = $("#project-type-input option:selected").text();
-    console.log(selectedLocation);
+    var selectedCity = $("#project-type-input option:selected").text();
+    var selectedCoords = $("#project-type-input option:selected").val();
+    console.log(selectedCity);
+    console.log(selectedCoords);
+    getWeatherForecast(selectedCoords);
 
 });
 
