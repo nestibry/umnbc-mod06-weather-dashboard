@@ -31,6 +31,8 @@ function renderLocationForm(geodata) {
 
 }
 
+
+
 projectFormEl.on('submit', function(event){
     
     event.preventDefault();
@@ -64,6 +66,7 @@ locationSearchEl.on('submit', function(event){
         console.log(data);
         geoData = data;
 
+        
         renderLocationForm(geoData);
 
         //     // // OpenWeather API 5-day/3-hour Weather Forecasting
