@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <title>The Weather Dashboard App</title>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <h1>Weather Dashboard</h1>
+                </a>
+                <!-- <h1 class="navbar-brand">Wea-Da</h1> -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-default"
+                    aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-default">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Saved Locations
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Chaseburg, Wisconsin, US</a></li>
+                                <li><a class="dropdown-item" href="#">Minneapolis, Minnesota, US</a></li>
+                                <li><a class="dropdown-item" href="#">Saint Cloud, Minnesota, US</a></li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Current Location</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+                        </li>
+                    </ul>
+                    <form id="location-search" class="d-flex ms-auto col-lg-4">
+                        <input id="location-input" class="form-control me-2" type="search" placeholder="City OR Zipcode"
+                            aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" data-bs-toggle="modal"
+                            data-bs-target="#new-project-modal">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
+    <!-- Current Weather Report p-5 -->
+    <section class="p-2 pt-4 pb-4 bg-light">
+        <div class="container">
+            
+            <!-- Current City Title Block -->
+            <div class="mb-4">
+                <h1 class="current-city">Minneapolis, Minnesota, US</h1>
+                <h5 class="current-location">(latitude: 44.456 longitude: -91.123)</h5>
+            </div>
+
+            <!-- Current Conditions Container  -->
+            <div class="row current-conditions-container">
+            
+                <!-- <div style="display: flex; align-items: stretch; height: 300px;"> -->
+
+            
+                    <!-- Current Weather Card -->
+                    <div class="col-12 col-md-6 mb-3 current-weather">
+                        <div class="card border-dark">
+                            <h4 class="card-header">Wednesday, October 18, 2023 -- 7:45AM</h4>
+                            <div class="card-body">
+                            <p class="card-text">ICON</p>
+                            <p class="card-text">Temp: 70 F</p>
+                            <p class="card-text">Wind: 8.5 MPH</p>
+                            <p class="card-text">Humidity: 44%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Map Card -- Placeholder  -->
+                    <div class="col-12 col-md-6 mb-3 current-radar">
+                        <div class="card h-100 border-dark">
+                            <h4 class="card-header">Weather Map</h4>
+                            <div class="card-body">
+                                <img class='img-fluid' src="" alt="weather-map-placeholder">
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- </div> -->
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5-day Forecast -->
+    <section class="p-2 pt-4 pb-4 mb-4">
+        <div class="container">
+            
+            <!-- Title Block -->
+            <div class="mb-4">
+                <h2>5-Day Forecast:</h2>
+            </div>
+
+            <!-- Forecast Cards Container  -->
+            <div class="row align-items-stretch justify-content-between forecast-container">
+
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 col-lg-2 flex-grow-1 forecast-card">
+                    <div class="card h-100 border-dark">
+                        <h4 class="card-header h-25">Wednesday <br>October 18, 2023</h4>
+                        <div class="card-body h-75">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">High: 70 F</p>
+                          <p class="card-text">Low: 50 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 col-lg-2 flex-grow-1 forecast-card">
+                    <div class="card h-100 border-dark">
+                        <h4 class="card-header h-25">Thursday <br>October 19, 2023</h4>
+                        <div class="card-body h-75">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">High: 70 F</p>
+                          <p class="card-text">Low: 50 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 col-lg-2 flex-grow-1 forecast-card">
+                    <div class="card h-100 border-dark">
+                        <h4 class="card-header h-25">Friday <br>October 20, 2023</h4>
+                        <div class="card-body h-75">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">High: 70 F</p>
+                          <p class="card-text">Low: 50 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 col-lg-2 flex-grow-1 forecast-card">
+                    <div class="card h-100 border-dark">
+                        <h4 class="card-header h-25">Saturday <br>October 21, 2023</h4>
+                        <div class="card-body h-75">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">High: 70 F</p>
+                          <p class="card-text">Low: 50 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 col-lg-2 flex-grow-1 forecast-card">
+                    <div class="card h-100 border-dark">
+                        <h4 class="card-header h-25">Sunday <br>October 22, 2023</h4>
+                        <div class="card-body h-75">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">High: 70 F</p>
+                          <p class="card-text">Low: 50 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Modal for adding a new project -->
+    <div class="modal fade" id="new-project-modal" tabindex="-1" aria-labelledby="new-project-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="project-form">
+                    <div class="modal-header custom-modal-header">
+                        <h5 class="modal-title" id="new-project-modal-label">Choose desired location...</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div class="mb-3">
+                            <label for="project-name-input">Project Name</label>
+                            <input type="text" id="project-name-input" class="form-control" placeholder="Enter the project's name" required/>
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="project-type-input" class="form-label">City</label>
+                            <select id="project-type-input" class="form-select" required>
+                                <option value="Minneapolis, Minnesota, US">Minneapolis, Minnesota, US</option>
+                                <option value="Minneapolis">Minneapolis</option>
+                                <option value="Duluth">Duluth, Minnesota, US</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- The data-bs-dismiss attribute tells Bootstrap to hide the <div class="modal-footer"> element on click. -->
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Get Weather Forecast</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Scripts: Bootstrap, jQuery, DayJS, script.js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+
+    <!-- Testing the Modal Form  -->
+    <script src="../js/test-modal-form.js"></script>
+
+</body>
+
+</html>
