@@ -55,22 +55,63 @@
         </nav>
     </div>
 
+
+
     <!-- Current Weather Report  -->
     <section class="p-5 mb-4 bg-light">
         <div class="container">
             
+            <!-- Current City Title Block -->
+            <div class="mb-4">
+                <h1 class="current-city">Minneapolis, Minnesota, US</h1>
+                <h5 class="current-location">(latitude: 44.456 longitude: -91.123)</h5>
+            </div>
 
             <!-- Current Conditions Container  -->
             <div class="row align-items-end current-conditions-container">
             
-                <!-- Current City and Weather Container -->
+                <!-- Current Weather Card -->
                 <div class="col-12 col-md-6 current-weather">
-                    <!-- Current City Title Block -->
-                    <div class="mb-4">
-                        <h1 class="current-city">Minneapolis, Minnesota, US</h1>
-                        <h5 class="current-location">(latitude: 44.456 longitude: -91.123)</h5>
+                    <div class="card border-dark">
+                        <h3 class="card-header">Wednesday, October 18, 20223 <br>7:45AM</h3>
+                        <div class="card-body">
+                          <p class="card-text">ICON</p>
+                          <p class="card-text">Temp: 70 F</p>
+                          <p class="card-text">Wind: 8.5 MPH</p>
+                          <p class="card-text">Humidity: 44%</p>
+                        </div>
                     </div>
-                    <!-- Current Weather Card  -->
+                </div>
+
+                <!-- Weather Map Card -- Placeholder  -->
+                <div class="col-12 col-md-6 current-radar">
+                    <div class="card border-dark">
+                        <h3 class="card-header">Weather Map</h3>
+                        <div class="card-body">
+                            <img class='img-fluid' src="" alt="weather-map-placeholder">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5-day Forecast -->
+    <section class="">
+        <div class="container">
+            
+            <!-- Current City Title Block -->
+            <div class="mb-4">
+                <h1>5-Day Forecast:</h1>
+            </div>
+
+            <!-- Current Conditions Container  -->
+            <div class="row align-items-end forecast-container">
+            
+                <!-- Daily Forecast Card -->
+                <div class="col-12 col-md-6 current-weather">
                     <div class="card border-dark">
                         <h3 class="card-header">Wednesday, October 18, 20223 <br>7:45AM</h3>
                         <div class="card-body">
@@ -95,8 +136,6 @@
             </div>
         </div>
     </section>
-
-
 
 
 
