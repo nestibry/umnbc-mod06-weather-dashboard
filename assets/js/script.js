@@ -4,6 +4,34 @@ var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
 
 
+
+
+function renderLocationForm(geodata) {
+
+    // Clear the testApiSection to get ready for the new rendering
+    // for(var j = (projectTypeInputEl.children().length - 1); j >=0; j--) {
+    //     projectTypeInputEl.children().eq(j).remove();
+    // }
+    projectTypeInputEl.empty();
+
+    // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
+    for(var i = 0; i < geodata.length; i++) {
+        var locationOptionEl = $('<option>');
+        locationOptionEl.addClass('weather-location');
+        locationOptionEl.val(`lat=${geodata[i].lat}&lon=${geodata[i].lon}`);
+        if(geodata[i].country === "US"){
+            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].state}, ${geodata[i].country}`);
+            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].state}-${geodata[i].country}`);
+        } else {
+            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].country}`);
+            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].country}`);
+        }
+        projectTypeInputEl.append(locationOptionEl);
+    }
+}
+
+
+var tempData = {};
 function fetchGeocode(geolocation) {
 
     fetch(geolocation.url)
@@ -12,46 +40,40 @@ function fetchGeocode(geolocation) {
     })
     .then(function (geodata) {
         console.log(geodata);
-        console.log(geolocation);
 
-        // Get latitude and longitude by zipcode || city (first city in array)
-        // Future To-do : add conditional for current location
-        var lat = geodata.lat || geodata[0].lat; 
-        var lon = geodata.lon || geodata[0].lon; 
+        var renderLocations = [];
+        
+        // Prepare data for Rendering Location Form
+        // queryString, lat, lon, displayText (city, state or city, zip)
+        if(geolocation.type === 'city'){
+            for(var i = 0; i < geodata.length; i++){
+                var newLoc = {
+                    queryStr: `lat=${geodata[i].lat}&lon=${geodata[i].lon}`,
+                    lat: geodata[i].lat,
+                    lon: geodata[i].lon,
+                    displayTxt: `${geodata[i].name}, ${geodata[i].state}`,
+                };
+                renderLocations.push(newLoc);
+            }
+        } 
+        else if(geolocation.type === 'zip') {
+                var newLoc = {
+                    queryStr: `lat=${geodata.lat}&lon=${geodata.lon}`,
+                    lat: geodata.lat,
+                    lon: geodata.lon,
+                    displayTxt: `${geodata.name}, ${geodata.zip}`,
+                };
+                renderLocations.push(newLoc);
+        }
+        console.log(renderLocations);
 
-        // // OpenWeather API 5-day/3-hour Weather Forecasting
-        // var units = "imperial";
-        // var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-        // console.log(forecastUrl);
 
-        // fetch(forecastUrl)
-        // .then(function (response) {
-        //     return response.json();
-        // })
-        // .then(function (data) {
-        //     console.log('Forecast Data:');
-        //     console.log(data);
-        //     apiData = data;
-
-        //     // Need to set all the parameters in here because this fetch has to successfully complete before moving on.
-        //     renderApiOutputs();
-
-        //     // Save to localStorage for "Saved Locations"
-        //     newLocation = {
-        //         id: data.city.id,
-        //         name: data.city.name,
-        //         lat: data.city.coord.lat,
-        //         lon: data.city.coord.lon
-        //     }
-        //     console.log('New Location:');
-        //     console.log(newLocation);
-        //     renderSavedLocations();
-
-        });
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Error connecting to OpenWeather API. Please try your search again.");
+    });
 }
-
-
-
 
 
 
