@@ -4,6 +4,7 @@ var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
 var cityInputEl = $('#city-input');
 var cityFormEl = $('#city-form');
+var dropdownMenuEl = $(".dropdown-menu");
 var closeForm = false;
 var forecastData = {};
 var savedLocations = [];
