@@ -3,6 +3,8 @@ var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
 var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
 var cityInputEl = $('#city-input');
+var cityFormEl = $('#city-form');
+var closeForm = false;
 
 
 
@@ -113,15 +115,38 @@ locationSearchEl.on('submit', function(event){
 
     } else {
         
-        $('#choose-city-modal').modal('toggle');
         
+        // Manually need to minimize the modal 
+        closeForm = true;
         console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         alert(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         
-        // Future To-do : find a way to minimize the modal manually so it doesn't appear
-        $('#choose-city-modal').modal('toggle');
-
-
     }
 
 });
+
+$( "#choose-city-modal" ).on('shown.bs.modal', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // If manually need to minimize the modal
+    if(closeForm){
+        $('#choose-city-modal').modal('toggle');
+        closeForm = false;
+    }
+});
+
+
+
+cityFormEl.on('submit', function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+    var selectedCity = $("#city-input option:selected").text();
+    var selectedCoords = $("#city-input option:selected").val();
+    console.log(selectedCity);
+    console.log(selectedCoords);
+    // getWeatherForecast(selectedCoords);
+
+});
+
