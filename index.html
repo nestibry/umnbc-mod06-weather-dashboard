@@ -123,6 +123,40 @@
         </div>
     </section>
 
+
+    <!-- Choose City Modal <= Search could return multiple cities, user needs to choose desired city for fetching weather forecast -->
+    <div class="modal fade" id="new-project-modal" tabindex="-1" aria-labelledby="new-project-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="project-form">
+                    <div class="modal-header custom-modal-header">
+                        <h5 class="modal-title" id="new-project-modal-label">Choose desired location...</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <div class="mb-3">
+                            <label for="project-name-input">Project Name</label>
+                            <input type="text" id="project-name-input" class="form-control" placeholder="Enter the project's name" required/>
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="project-type-input" class="form-label">City</label>
+                            <select id="project-type-input" class="form-select" required>
+                                <option value="Minneapolis, Minnesota, US">Minneapolis, Minnesota, US</option>
+                                <option value="Minneapolis">Minneapolis</option>
+                                <option value="Duluth">Duluth, Minnesota, US</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- The data-bs-dismiss attribute tells Bootstrap to hide the <div class="modal-footer"> element on click. -->
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Get Weather Forecast</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     
         
     <!-- Scripts: Bootstrap, jQuery, DayJS, script.js  -->
