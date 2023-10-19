@@ -70,7 +70,7 @@ function fetchGeocode(geolocation) {
     });
 }
 
-function getWeatherForecast(locationCoords = "lat=40.6995&lon=-99.0819" ) {
+function getWeatherForecast(locationCoords) {
 
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
