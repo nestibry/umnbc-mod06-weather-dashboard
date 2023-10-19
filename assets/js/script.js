@@ -21,9 +21,8 @@ locationSearchEl.on('submit', function(event){
     //  : Add capability to check valid input AND can't be empty
     //  : Add capability to choose from a list of city inputs otherwise throw an error (e.g., Minneapolis,Minnesota,US; Minneapolis,Kansas,US; Minneapolis,etc,US;)
 
+
     // Check if the input is a City or Zipcode
-
-
     if( isNaN( parseInt(locationInput) ) ){
         
         // Geocoding by City, (State), Country Code
@@ -34,7 +33,6 @@ locationSearchEl.on('submit', function(event){
     } else if ( ( !isNaN(parseInt(locationInput)) ) && ( locationInput.length == 5 )) {
        
         // Geocoding by Zip Code
-        // Future To-do: Check that the zipcode is 5-digits otherwise throw an error
         var zipCode = locationInput;
         var countryCode = "US";
         var geoUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
