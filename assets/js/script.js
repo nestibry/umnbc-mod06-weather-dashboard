@@ -121,8 +121,10 @@ function fetchGeocode(geolocation) {
     });
 }
 
-function getWeatherForecast(locationCoords) {
+function getWeatherForecast(selectedLocation) {
 
+    var locationCoords = selectedLocation.queryStr;
+    
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
     console.log(baseUrl);
@@ -214,11 +216,18 @@ cityFormEl.on('submit', function(event){
     
     event.preventDefault();
     event.stopPropagation();
-    var selectedCity = $("#city-input option:selected").text();
-    var selectedCoords = $("#city-input option:selected").val();
-    console.log(selectedCity);
-    console.log(selectedCoords);
-    getWeatherForecast(selectedCoords);
+
+    var selectedLocation = {
+        displayStr: $("#city-input option:selected").text(),
+        queryStr: $("#city-input option:selected").val(),
+    }
+    // var selectedCity = $("#city-input option:selected").text();
+    // var selectedCoords = $("#city-input option:selected").val();
+    
+    console.log(selectedLocation.displayStr);
+    console.log(selectedLocation.queryStr);
+
+    getWeatherForecast(selectedLocation);
 
 });
 
