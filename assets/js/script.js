@@ -2,31 +2,23 @@
 var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
 var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
-
+var cityInputEl = $('#city-input');
 
 
 
 function renderLocationForm(geodata) {
 
     // Clear the testApiSection to get ready for the new rendering
-    // for(var j = (projectTypeInputEl.children().length - 1); j >=0; j--) {
-    //     projectTypeInputEl.children().eq(j).remove();
-    // }
-    projectTypeInputEl.empty();
+    cityInputEl.empty();
+    console.log(`Rendering Location Form:`)
 
-    // var locactionCoords = "lat=43.6569157&lon=-90.8542977";
+    // render locations to choose from
     for(var i = 0; i < geodata.length; i++) {
+        console.log(`${geodata[i].displayTxt} => ${geodata[i].queryStr}`);
         var locationOptionEl = $('<option>');
-        locationOptionEl.addClass('weather-location');
-        locationOptionEl.val(`lat=${geodata[i].lat}&lon=${geodata[i].lon}`);
-        if(geodata[i].country === "US"){
-            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].state}, ${geodata[i].country}`);
-            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].state}-${geodata[i].country}`);
-        } else {
-            locationOptionEl.text(`${geodata[i].name}, ${geodata[i].country}`);
-            locationOptionEl.addClass(`${geodata[i].name}-${geodata[i].country}`);
-        }
-        projectTypeInputEl.append(locationOptionEl);
+        locationOptionEl.val(geodata[i].queryStr);
+        locationOptionEl.text(geodata[i].displayTxt);
+        cityInputEl.append(locationOptionEl);
     }
 }
 
@@ -66,7 +58,7 @@ function fetchGeocode(geolocation) {
                 geoData.push(newLoc);
         }
         console.log(geoData);
-
+        renderLocationForm(geoData);
 
     })
     .catch(error => {
