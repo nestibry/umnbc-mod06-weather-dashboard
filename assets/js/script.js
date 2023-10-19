@@ -17,13 +17,13 @@ function readFromLocalStorage() {
 }
 readFromLocalStorage();
 
-function saveToLocalStorage(locationSearched) {
+function saveToLocalStorage(selectedLocation) {
     readFromLocalStorage();
 
     // new search string
     var newItem = {
-        displayStr: locationSearched.displayStr,
-        queryStr: locationSearched.queryString,
+        displayStr: selectedLocation.displayStr,
+        queryStr: selectedLocation.queryString,
     }
 
     // Compare to existing and only add new unique searches
@@ -124,7 +124,7 @@ function fetchGeocode(geolocation) {
 function getWeatherForecast(selectedLocation) {
 
     var locationCoords = selectedLocation.queryStr;
-    
+
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
     console.log(baseUrl);
@@ -136,6 +136,7 @@ function getWeatherForecast(selectedLocation) {
     .then(function (data) {
         console.log(data);
         forecastData = data;
+        saveToLocalStorage(selectedLocation);
     })
     .catch(error => {
         console.error(error);
