@@ -30,9 +30,9 @@ function saveToLocalStorage(locationSearched) {
     var isNewSearch = (savedSearches.filter(savedSearches => savedSearches.queryStr == newItem.queryStr).length === 0);
     if(isNewSearch){
         savedSearches.push(newItem);
-        localStorage.setItem('petspace-saved-searches', JSON.stringify(savedSearches)); 
+        localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedSearches)); 
     } else {
-        console.log("Not a new search parameters...");
+        console.log("Not a new unique search...");
     }
 
 }
