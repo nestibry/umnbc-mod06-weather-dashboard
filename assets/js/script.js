@@ -113,12 +113,13 @@ locationSearchEl.on('submit', function(event){
 
     } else {
         
+        $('#choose-city-modal').modal('toggle');
         
         console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         alert(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         
         // Future To-do : find a way to minimize the modal manually so it doesn't appear
-        $('#choose-city-modal').attr('class', 'modal fade');
+        $('#choose-city-modal').modal('toggle');
 
 
     }
