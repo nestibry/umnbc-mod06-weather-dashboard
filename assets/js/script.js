@@ -17,13 +17,13 @@ function readFromLocalStorage() {
 }
 readFromLocalStorage();
 
-function saveToLocalStorage() {
+function saveToLocalStorage(locationSearched) {
     readFromLocalStorage();
 
     // new search string
     var newItem = {
-        displayStr: storeString,
-        queryStr: queryString,
+        displayStr: locationSearched.displayStr,
+        queryStr: locationSearched.queryString,
     }
 
     // Compare to existing and only add new unique searches
