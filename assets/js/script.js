@@ -6,6 +6,13 @@ var cityInputEl = $('#city-input');
 var cityFormEl = $('#city-form');
 var closeForm = false;
 var forecastData = {};
+var savedLocations = [];
+
+
+// Local Storage Functions and Render Saved Searches
+function readFromLocalStorage() {  
+    savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
+}
 
 
 
