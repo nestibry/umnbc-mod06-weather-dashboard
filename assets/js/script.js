@@ -3,6 +3,7 @@ var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
 var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
 
+var locationInput = "";
 
 
 locationSearchEl.on('submit', function(event){
@@ -11,7 +12,7 @@ locationSearchEl.on('submit', function(event){
     event.stopPropagation();
 
     // User input location, City or Zipcode
-    var locationInput = locationInputEl.val();
+    locationInput = locationInputEl.val();
     console.log(`Searching for: ${locationInput}`);
     
 
@@ -21,14 +22,16 @@ locationSearchEl.on('submit', function(event){
     //  : Add capability to choose from a list of city inputs otherwise throw an error (e.g., Minneapolis,Minnesota,US; Minneapolis,Kansas,US; Minneapolis,etc,US;)
 
     // Check if the input is a City or Zipcode
-    if( isNaN( locationInput * 1 ) ){
+
+
+    if( isNaN( parseInt(locationInput) ) ){
         
         // Geocoding by City, (State), Country Code
         var city = locationInput; 
         var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;  // Only up to 5 results can be returned in API response
         console.log(`fetchUrl by city: ${geoUrl}`);
 
-    } else {
+    } else if ( ( !isNaN(parseInt(locationInput)) ) && ( locationInput.length == 5 )) {
        
         // Geocoding by Zip Code
         // Future To-do: Check that the zipcode is 5-digits otherwise throw an error
@@ -37,6 +40,8 @@ locationSearchEl.on('submit', function(event){
         var geoUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
         console.log(`fetchUrl by zipcode: ${geoUrl}`);
 
+    } else {
+        console.log(`Location: ${locationInput} is not a city or zipcode`);
     }
 
 
