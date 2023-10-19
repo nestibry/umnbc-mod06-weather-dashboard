@@ -5,6 +5,7 @@ var locationInputEl = $('#location-input');
 var cityInputEl = $('#city-input');
 var cityFormEl = $('#city-form');
 var closeForm = false;
+var forecastData = {};
 
 
 
@@ -65,7 +66,27 @@ function fetchGeocode(geolocation) {
     })
     .catch(error => {
         console.error(error);
-        alert("Error connecting to OpenWeather API. Please try your search again.");
+        alert(error);
+    });
+}
+
+function getWeatherForecast(locationCoords = "lat=40.6995&lon=-99.0819" ) {
+
+    // OpenWeather API 5-day/3-hour Weather Forecasting
+    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
+    console.log(baseUrl);
+
+    fetch(baseUrl)
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        forecastData = data;
+    })
+    .catch(error => {
+        console.error(error);
+        alert(error);
     });
 }
 
@@ -119,7 +140,7 @@ locationSearchEl.on('submit', function(event){
         // Manually need to minimize the modal 
         closeForm = true;
         console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
-        alert(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
+        alert(`Location Error: "${locationInput}" is not a city or zipcode. \nPlease try your search again.`);
         
     }
 
@@ -146,7 +167,7 @@ cityFormEl.on('submit', function(event){
     var selectedCoords = $("#city-input option:selected").val();
     console.log(selectedCity);
     console.log(selectedCoords);
-    // getWeatherForecast(selectedCoords);
+    getWeatherForecast(selectedCoords);
 
 });
 
