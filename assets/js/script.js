@@ -14,11 +14,11 @@ function renderLocationForm(geodata) {
 
     // render locations to choose from
     for(var i = 0; i < geodata.length; i++) {
-        console.log(`${geodata[i].displayTxt} => ${geodata[i].queryStr}`);
         var locationOptionEl = $('<option>');
         locationOptionEl.val(geodata[i].queryStr);
         locationOptionEl.text(geodata[i].displayTxt);
         cityInputEl.append(locationOptionEl);
+        console.log(`${geodata[i].displayTxt} => ${geodata[i].queryStr}`);
     }
 }
 
@@ -96,7 +96,6 @@ locationSearchEl.on('submit', function(event){
             type: 'city',
             url: `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`, 
         };
-        // var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;  // Only up to 5 results can be returned in API response
         console.log(`fetchUrl by city: ${geolocation.url}`);
         fetchGeocode(geolocation);
 
@@ -109,12 +108,19 @@ locationSearchEl.on('submit', function(event){
             type: 'zip',
             url: `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`, 
         };
-        // var geoUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
         console.log(`fetchUrl by zipcode: ${geolocation.url}`);
         fetchGeocode(geolocation);
 
     } else {
-        console.log(`Location: ${locationInput} is not a city or zipcode`);
+        
+        
+        console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
+        alert(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
+        
+        // Future To-do : find a way to minimize the modal manually so it doesn't appear
+        $('#choose-city-modal').attr('class', 'modal fade');
+
+
     }
 
 });
