@@ -3,18 +3,16 @@ var apiKey = "8126bb2957be37f081cd3c30e29ee1f6";
 var locationSearchEl = $('#location-search');
 var locationInputEl = $('#location-input');
 
-var locationInput = "";
 
+function fetchGeocode(geolocation) {
 
-
-function fetchGeocode(geoUrl) {
-
-    fetch(geoUrl)
+    fetch(geolocation.url)
     .then(function (response) {
         return response.json();
     })
     .then(function (geodata) {
         console.log(geodata);
+        console.log(geolocation);
 
         // Get latitude and longitude by zipcode || city (first city in array)
         // Future To-do : add conditional for current location
@@ -63,7 +61,7 @@ locationSearchEl.on('submit', function(event){
     event.stopPropagation();
 
     // User input location, City or Zipcode
-    locationInput = locationInputEl.val();
+    var locationInput = locationInputEl.val();
     console.log(`Searching for: ${locationInput}`);
     
     // Reset input
@@ -80,18 +78,26 @@ locationSearchEl.on('submit', function(event){
         
         // Geocoding by City, (State), Country Code
         var city = locationInput; 
-        var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;  // Only up to 5 results can be returned in API response
-        console.log(`fetchUrl by city: ${geoUrl}`);
-        fetchGeocode(geoUrl);
+        var geolocation = {
+            type: 'city',
+            url: `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`, 
+        };
+        // var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;  // Only up to 5 results can be returned in API response
+        console.log(`fetchUrl by city: ${geolocation.url}`);
+        fetchGeocode(geolocation);
 
     } else if ( ( !isNaN(parseInt(locationInput)) ) && ( locationInput.length == 5 )) {
        
         // Geocoding by Zip Code
         var zipCode = locationInput;
         var countryCode = "US";
-        var geoUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
-        console.log(`fetchUrl by zipcode: ${geoUrl}`);
-        fetchGeocode(geoUrl);
+        var geolocation = {
+            type: 'zip',
+            url: `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`, 
+        };
+        // var geoUrl = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+        console.log(`fetchUrl by zipcode: ${geolocation.url}`);
+        fetchGeocode(geolocation);
 
     } else {
         console.log(`Location: ${locationInput} is not a city or zipcode`);
