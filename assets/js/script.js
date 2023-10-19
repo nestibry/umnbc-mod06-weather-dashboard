@@ -9,11 +9,54 @@ var forecastData = {};
 var savedLocations = [];
 
 
-// Local Storage Functions and Render Saved Searches
+// Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
+    // savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
     savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
 }
+readFromLocalStorage();
 
+function saveToLocalStorage() {
+    readFromLocalStorage();
+
+    // new search string
+    var newItem = {
+        displayStr: storeString,
+        queryStr: queryString,
+    }
+
+    // Compare to existing and only add new unique searches
+    var isNewSearch = (savedSearches.filter(savedSearches => savedSearches.queryStr == newItem.queryStr).length === 0);
+    if(isNewSearch){
+        savedSearches.push(newItem);
+        localStorage.setItem('petspace-saved-searches', JSON.stringify(savedSearches)); 
+    } else {
+        console.log("Not a new search parameters...");
+    }
+
+}
+
+function renderSavedLocations() {
+
+    // Read the saved searches from localStorage => "savedSearches" global variable
+    readFromLocalStorage();
+
+    // Clear the Dropdown Menu
+    dropdownMenuEl.empty();
+
+    // Iterates over all the savedSearches to add to the dropdown menu
+    for(var i = 0; i < savedSearches.length; i++){
+        var listEl = $('<li>');
+        var anchorEl = $('<a>');
+        anchorEl.addClass('dropdown-item');
+        anchorEl.attr('href', '#');
+        anchorEl.attr('data-query-str', savedSearches[i].queryStr);
+        anchorEl.text(savedSearches[i].displayStr);
+        listEl.append(anchorEl);
+        dropdownMenuEl.append(listEl);
+    }
+}
+renderSavedLocations();
 
 
 function renderLocationForm(geodata) {
