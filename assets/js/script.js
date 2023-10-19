@@ -23,7 +23,7 @@ function renderLocationForm(geodata) {
 }
 
 
-var tempData = {};
+
 function fetchGeocode(geolocation) {
 
     fetch(geolocation.url)
