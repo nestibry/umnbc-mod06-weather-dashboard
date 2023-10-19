@@ -27,10 +27,10 @@ function saveToLocalStorage(selectedLocation) {
     }
 
     // Compare to existing and only add new unique searches
-    var isNewSearch = (savedSearches.filter(savedSearches => savedSearches.queryStr == newItem.queryStr).length === 0);
+    var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.queryStr == newItem.queryStr).length === 0);
     if(isNewSearch){
-        savedSearches.push(newItem);
-        localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedSearches)); 
+        savedLocations.push(newItem);
+        localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
     } else {
         console.log("Not a new unique search...");
     }
@@ -39,20 +39,20 @@ function saveToLocalStorage(selectedLocation) {
 
 function renderSavedLocations() {
 
-    // Read the saved searches from localStorage => "savedSearches" global variable
+    // Read the saved searches from localStorage => "savedLocations" global variable
     readFromLocalStorage();
 
     // Clear the Dropdown Menu
     dropdownMenuEl.empty();
 
-    // Iterates over all the savedSearches to add to the dropdown menu
-    for(var i = 0; i < savedSearches.length; i++){
+    // Iterates over all the savedLocations to add to the dropdown menu
+    for(var i = 0; i < savedLocations.length; i++){
         var listEl = $('<li>');
         var anchorEl = $('<a>');
         anchorEl.addClass('dropdown-item');
         anchorEl.attr('href', '#');
-        anchorEl.attr('data-query-str', savedSearches[i].queryStr);
-        anchorEl.text(savedSearches[i].displayStr);
+        anchorEl.attr('data-query-str', savedLocations[i].queryStr);
+        anchorEl.text(savedLocations[i].displayStr);
         listEl.append(anchorEl);
         dropdownMenuEl.append(listEl);
     }
