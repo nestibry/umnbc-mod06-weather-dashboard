@@ -79,16 +79,6 @@ function renderForecast(selectedLocation, forecast){
     $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
 
     // Aggregate the Daily Forecasts
-    // var dailyForecasts = {
-    //     list: [
-    //         {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //         {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //         {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //         {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //         {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //     ],
-    // }   
-
     var dailyForecasts = [
             {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
             {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
@@ -102,10 +92,12 @@ function renderForecast(selectedLocation, forecast){
     // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
     // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
     // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
-    var forecastDataByHour = forecastData.list;
+    var forecastDataByHour = forecastData.list;  //forecast.list
     var forecastDataByDay = [];
+
+    var startDay = parseInt(dayjs().format('D'));
     
-    for(var i = 20; i < 25; i++){
+    for(var i = startDay; i < (startDay + 5); i++){
         var newDay = {
             date: i,
             list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
