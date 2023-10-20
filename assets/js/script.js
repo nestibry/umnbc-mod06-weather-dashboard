@@ -241,3 +241,20 @@ cityFormEl.on('submit', function(event){
 
 });
 
+
+dropdownMenuEl.on('click', '.dropdown-item', function(event){
+    
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Location Search from dropdown
+    
+    var selectedLocation = {
+        displayStr: $(this).text(),
+        queryStr: $(this).attr('data-query-str'),
+    }
+    
+    getWeatherForecast(selectedLocation);
+    
+});
+
