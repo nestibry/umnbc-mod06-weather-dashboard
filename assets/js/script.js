@@ -84,7 +84,7 @@ function renderForecast(selectedLocation, forecast){
     var dailyForecasts = [];
     for(var i = startDay; i < (startDay + 5); i++){
         
-        var aggDailyForecast = {date:``, icon:``, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
+        var aggDailyForecast = {date:``, icon:`02d`, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
 
         // Filter the hourly data by day
         var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
@@ -113,6 +113,7 @@ function renderForecast(selectedLocation, forecast){
         
 
         console.log(aggDailyForecast);
+        dailyForecasts.push(aggDailyForecast);
         
     }
  // var newDay = {
@@ -126,13 +127,13 @@ function renderForecast(selectedLocation, forecast){
     // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
 
     // Render 5-Day Forecast Container
-    var dailyForecasts = [
-        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    ];
+    // var dailyForecasts = [
+    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    // ];
 
     $(".forecast-container").empty();
 
