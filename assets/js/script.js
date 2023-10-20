@@ -161,13 +161,11 @@ locationSearchEl.on('submit', function(event){
 
     // User input location, City or Zipcode
     var locationInput = locationInputEl.val();
-    console.log(`Searching for: ${locationInput}`);
     
     // Future To-dos
     //  : Need a modal to do City input, State input, Country input, ZIP Code input
     //  : Add capability to check valid input AND can't be empty
     //  : Add capability to choose from a list of city inputs otherwise throw an error (e.g., Minneapolis,Minnesota,US; Minneapolis,Kansas,US; Minneapolis,etc,US;)
-
 
     // Check if the input is a City or Zipcode
     if( isNaN( parseInt(locationInput) ) ){
@@ -194,10 +192,11 @@ locationSearchEl.on('submit', function(event){
         fetchGeocode(geolocation);
 
     } else {
-        // Manually need to minimize the modal 
-        closeForm = true;
-        console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
+        
+        // Did not return a US city => Manually minimize the modal form 
+        closeForm = true; 
         alert(`Location Error: "${locationInput}" is not a city or zipcode. \nPlease try your search again.`);
+
     }
 
     // Reset input
