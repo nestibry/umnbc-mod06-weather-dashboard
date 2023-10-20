@@ -128,11 +128,8 @@ function fetchGeocode(geolocation) {
 
 function getWeatherForecast(selectedLocation) {
 
-    var locationCoords = selectedLocation.queryStr;
-    console.log(`getWetherForecast():`)
-    console.log(selectedLocation);
     // OpenWeather API 5-day/3-hour Weather Forecasting
-    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
+    var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${selectedLocation.queryStr}&units=imperial&appid=${apiKey}`;
     console.log(baseUrl);
 
     fetch(baseUrl)
@@ -142,8 +139,6 @@ function getWeatherForecast(selectedLocation) {
     .then(function (data) {
         console.log(data);
         forecastData = data;
-        console.log(`call to saveToLocalStorage():`)
-        console.log(selectedLocation);
         saveToLocalStorage(selectedLocation);
     })
     .catch(error => {
