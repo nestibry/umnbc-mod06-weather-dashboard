@@ -68,7 +68,7 @@ function renderForecast(selectedLocation, forecast){
     $(".current-city").text(selectedLocation.displayStr);
     $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
     $(".current-time").text(currDateHour);
-    $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)} \xB0F`);
+    $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)}\xB0F`);
     $(".current-pop").text(`${Math.floor(forecast.list[0].pop * 100)}%`);
     $(".current-clouds").text(`${forecast.list[0].clouds.all}%`);
     $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
@@ -87,7 +87,7 @@ function renderForecast(selectedLocation, forecast){
     //                 <div class="card h-100 border-dark">
     //                     <h4 class="card-header">Wednesday <br>October 18</h4>
     //                     <div class="card-body">
-    //                       <h6 class="card-text">ICON</h6>
+    //                       <img class="card-text" src="" />
     //                       <h6 class="card-text">High:</h6>
     //                       <h6 class="card-text">Low:</h6>
     //                       <h6 class="card-text">Prec:</h6>
@@ -96,23 +96,31 @@ function renderForecast(selectedLocation, forecast){
     //                       <h6 class="card-text">Hmd:</h6>
     var dailyForecasts = {
         list: [
-            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
-            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
-            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
-            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
-            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
         ],
     }   
 
     $(".forecast-container").empty();
 
-    for(var i = 0; i < 5; i++){
+    for(var i = 0; i < dailyForecasts.list.length; i++){
         
         // Card Body
         var cardBodyEl = $('<div class="card-body">');
-        var iconEl = $('<h6 class="card-text">');
-        iconEl.text(dailyForecasts.list[i].icon);
-        cardBodyEl.append(iconEl);
+        cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts.list[i].icon}.png`) ); 
+        cardBodyEl.append( $('<h6 class="card-text">').text(`High: ${dailyForecasts.list[i].high}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Low: ${dailyForecasts.list[i].low}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Prec: ${dailyForecasts.list[i].prec}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Clds: ${dailyForecasts.list[i].clds}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Wnd: ${dailyForecasts.list[i].wnd} mph`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Hmd: ${dailyForecasts.list[i].hmd}%`) );
+
+        // var iconEl = $('<img class="card-text">');
+        // iconEl.attr('src', `https://openweathermap.org./img/wn/${dailyForecasts.list[i].icon}@2x.png`);
+        // cardBodyEl.append(iconEl);
 
         // Card Info Div
         var cardInfoDivEl = $('<div class="card h-100 border-dark">');
