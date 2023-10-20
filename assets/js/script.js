@@ -81,7 +81,6 @@ function renderForecast(selectedLocation, forecast){
     // Render 5-Day Forecast Container
     // <!-- Forecast Cards Container  -->
     //         <div class="row align-items-stretch justify-content-between forecast-container">
-
     //             <!-- Daily Forecast Card -->
     //             <div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">
     //                 <div class="card h-100 border-dark">
@@ -92,11 +91,7 @@ function renderForecast(selectedLocation, forecast){
     //                       <p class="card-text">Low: 50 F</p>
     //                       <p class="card-text">Wind: 8.5 MPH</p>
     //                       <p class="card-text">Humidity: 44%</p>
-    //                     </div>
-    //                 </div>
-    //             </div>
-
-    //         </div>
+   
 
 
 }
