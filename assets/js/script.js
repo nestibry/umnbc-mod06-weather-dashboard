@@ -163,9 +163,6 @@ locationSearchEl.on('submit', function(event){
     var locationInput = locationInputEl.val();
     console.log(`Searching for: ${locationInput}`);
     
-    // Reset input
-    locationInputEl.val('');
-
     // Future To-dos
     //  : Need a modal to do City input, State input, Country input, ZIP Code input
     //  : Add capability to check valid input AND can't be empty
@@ -202,6 +199,10 @@ locationSearchEl.on('submit', function(event){
         console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         alert(`Location Error: "${locationInput}" is not a city or zipcode. \nPlease try your search again.`);
     }
+
+    // Reset input
+    locationInputEl.val('');
+
 });
 
 
