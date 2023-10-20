@@ -106,16 +106,16 @@ function renderForecast(selectedLocation, forecast){
         aggDailyForecast.prec = Math.floor(maxPrec[0].pop * 100);
 
         // Sort descending by cloud% and get max cloudiness from first element
-        var maxWind = forecastDataByDay.sort((a,b) => b.wind.speed - a.wind.speed);
-        aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
+        var maxClds = forecastDataByDay.sort((a,b) => b.clouds.all - a.clouds.all);
+        aggDailyForecast.clds = Math.floor(maxClds[0].clouds.all);
 
         // Sort descending by windspeed and get max wind from first element
         var maxWind = forecastDataByDay.sort((a,b) => b.wind.speed - a.wind.speed);
         aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
 
         // Sort descending by humidity and get max humidity from first element
-        // var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        // aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
+        var maxHmd = forecastDataByDay.sort((a,b) => b.main.humidity - a.main.humidity);
+        aggDailyForecast.hmd = Math.floor(maxHmd[0].main.humidity);
 
         console.log(aggDailyForecast);
         dailyForecasts.push(aggDailyForecast);
