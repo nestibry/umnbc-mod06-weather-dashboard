@@ -88,26 +88,30 @@ function renderForecast(selectedLocation, forecast){
 
         // Filter the hourly data by day
         var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
-        var forecastDay = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
-        aggDailyForecast.date = forecastDay;
+        var forecastDate = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
+        aggDailyForecast.date = forecastDate;
         
         // Sort icons and tally up most frequent icon to display
         
         // Sort descending by temp_max and get high temp from first element
         var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        aggDailyForecast.high = maxTemps[0].main.temp_max;
+        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
 
         // Sort ascending by temp_min and get low temp from first element
         var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
-        aggDailyForecast.low = minTemps[0].main.temp_min;
+        aggDailyForecast.low = Math.floor(minTemps[0].main.temp_min);
 
-        // Average the chance of precipitation%
+        // Sort descending by precipitation% and get max percipitation% from first element
+        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
 
-        // Average the chance of clouds%
+        // Sort descending by cloud% and get max cloudiness from first element
+        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
 
-        // Average the wind speed
+        // Sort descending by windspeed and get max wind from first element
 
-        // Average the humidity%
+        // Sort descending by humidity and get max humidity from first element
 
         
         
