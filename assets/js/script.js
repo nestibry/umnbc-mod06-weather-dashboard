@@ -236,6 +236,7 @@ function getWeatherForecast(selectedLocation) {
         alert(error);
     });
 }
+getWeatherForecast(initialWeatherLocation);
 
 
 locationSearchEl.on('submit', function(event){
