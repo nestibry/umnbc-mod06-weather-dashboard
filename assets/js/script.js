@@ -12,14 +12,11 @@ var savedLocations = [];
 
 // Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
-    // savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
     savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
 }
+readFromLocalStorage();
 
 function renderSavedLocations() {
-
-    // Read the saved searches from localStorage => "savedLocations" global variable
-    readFromLocalStorage();
 
     // Clear the Dropdown Menu
     dropdownMenuEl.empty();
@@ -39,6 +36,8 @@ function renderSavedLocations() {
 renderSavedLocations();
 
 function saveToLocalStorage(selectedLocation) {
+    
+    // Refresh the savedLocations to compare against
     readFromLocalStorage();
   
     // new search string
@@ -50,11 +49,11 @@ function saveToLocalStorage(selectedLocation) {
     console.log(newItem);
 
     // Compare to existing and only add new unique searches
-    var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.queryStr == newItem.queryStr).length === 0);
+    var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.displayStr == newItem.displayStr).length === 0);
     if(isNewSearch){
         savedLocations.push(newItem);
-        renderSavedLocations();
         localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
+        renderSavedLocations();
     } else {
         console.log("Not a new unique search...");
     }
