@@ -9,6 +9,11 @@ var closeForm = false;
 var forecastData = {};
 var savedLocations = [];
 
+var initialWeatherLocation = {
+    displayStr: "Minneapolis, Minnesota",
+    queryStr: "lat=44.9772995&lon=-93.2654692",
+}
+
 
 // Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
