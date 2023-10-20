@@ -16,6 +16,7 @@ function readFromLocalStorage() {
 }
 readFromLocalStorage();
 
+
 function renderSavedLocations() {
 
     // Clear the Dropdown Menu
@@ -34,6 +35,7 @@ function renderSavedLocations() {
     }
 }
 renderSavedLocations();
+
 
 function saveToLocalStorage(selectedLocation) {
     
@@ -63,8 +65,6 @@ function saveToLocalStorage(selectedLocation) {
 }
 
 
-
-
 function renderLocationForm(geodata) {
 
     // Clear the testApiSection to get ready for the new rendering
@@ -80,7 +80,6 @@ function renderLocationForm(geodata) {
         console.log(`${geodata[i].displayTxt} => ${geodata[i].queryStr}`);
     }
 }
-
 
 
 function fetchGeocode(geolocation) {
@@ -120,6 +119,7 @@ function fetchGeocode(geolocation) {
     });
 }
 
+
 function getWeatherForecast(selectedLocation) {
 
     // OpenWeather API 5-day/3-hour Weather Forecasting
@@ -140,7 +140,6 @@ function getWeatherForecast(selectedLocation) {
         alert(error);
     });
 }
-
 
 
 locationSearchEl.on('submit', function(event){
