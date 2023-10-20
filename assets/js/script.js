@@ -90,14 +90,26 @@ function renderForecast(selectedLocation, forecast){
         var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
         var forecastDay = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
         aggDailyForecast.date = forecastDay;
-    
+        
+        // Sort icons and tally up most frequent icon to display
+        
+        // Sort descending by temp_max and get high temp from first element
+        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        aggDailyForecast.high = maxTemps[0].main.temp_max;
+
         // Sort ascending by temp_min and get low temp from first element
         var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
         aggDailyForecast.low = minTemps[0].main.temp_min;
 
-        // Sort descending by temp_max and get high temp from first element
-        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        aggDailyForecast.high = maxTemps[0].main.temp_max;
+        // Average the chance of precipitation%
+
+        // Average the chance of clouds%
+
+        // Average the wind speed
+
+        // Average the humidity%
+
+        
         
 
         console.log(aggDailyForecast);
