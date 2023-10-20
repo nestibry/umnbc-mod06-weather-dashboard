@@ -104,6 +104,7 @@ function renderForecast(selectedLocation, forecast){
         ],
     }   
 
+    // Render 5-Day Forecast Container
     $(".forecast-container").empty();
 
     for(var i = 0; i < dailyForecasts.list.length; i++){
@@ -122,7 +123,6 @@ function renderForecast(selectedLocation, forecast){
         var cardInfoDivEl = $('<div class="card h-100 border-dark">');
         cardInfoDivEl.append( $('<h4 class="card-header">').text(dailyForecasts.list[i].date) );
         cardInfoDivEl.append( cardBodyEl );
-     
 
         // Daily Forecast Card
         var dailyForecastCardEl = $('<div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">');
