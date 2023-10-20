@@ -78,22 +78,7 @@ function renderForecast(selectedLocation, forecast){
     $(".current-icon").attr('src', iconUrl);
     $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
 
-    // Render 5-Day Forecast Container
-    // <!-- Forecast Cards Container  -->
-    //         <div class="row align-items-stretch justify-content-between forecast-container">
-
-    //             <!-- Daily Forecast Card -->
-    //             <div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">
-    //                 <div class="card h-100 border-dark">
-    //                     <h4 class="card-header">Wednesday <br>October 18</h4>
-    //                     <div class="card-body">
-    //                       <img class="card-text" src="" />
-    //                       <h6 class="card-text">High:</h6>
-    //                       <h6 class="card-text">Low:</h6>
-    //                       <h6 class="card-text">Prec:</h6>
-    //                       <h6 class="card-text">Clds:</h6>
-    //                       <h6 class="card-text">Wnd:</h6>
-    //                       <h6 class="card-text">Hmd:</h6>
+    // Aggregate the Daily Forecasts
     var dailyForecasts = {
         list: [
             {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
