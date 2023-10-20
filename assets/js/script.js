@@ -81,6 +81,7 @@ function renderForecast(selectedLocation, forecast){
     // Aggregate the Daily Forecasts
     var forecastDataByHour = forecastData.list;  //forecast.list
     var startDay = parseInt(dayjs().format('D'));
+    var dailyForecasts = [];
     for(var i = startDay; i < (startDay + 5); i++){
         
         var aggDailyForecast = {date:``, icon:``, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
@@ -90,14 +91,14 @@ function renderForecast(selectedLocation, forecast){
         var forecastDay = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
         aggDailyForecast.date = forecastDay;
     
-        // Sort descending by temp_max and get high temp from first element
-        var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
-        console.log(`low temp: ${minTemps[0].main.temp_min}`);
-
         // Sort ascending by temp_min and get low temp from first element
+        var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
+        aggDailyForecast.low = minTemps[0].main.temp_min;
+
+        // Sort descending by temp_max and get high temp from first element
         var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        console.log(maxTemps);
-        console.log(`high temp: ${maxTemps[0].main.temp_max}`);
+        aggDailyForecast.high = maxTemps[0].main.temp_max;
+        
 
         console.log(aggDailyForecast);
         
