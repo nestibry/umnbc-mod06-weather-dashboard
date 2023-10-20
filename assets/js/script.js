@@ -9,6 +9,11 @@ var closeForm = false;
 var forecastData = {};
 var savedLocations = [];
 
+var initialWeatherLocation = {
+    displayStr: "Minneapolis, Minnesota",
+    queryStr: "lat=44.9772995&lon=-93.2654692",
+}
+
 
 // Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
@@ -59,6 +64,101 @@ function saveToLocalStorage(selectedLocation) {
     } 
 
 }
+saveToLocalStorage(initialWeatherLocation);
+
+
+
+function renderForecast(selectedLocation, forecast){
+
+    // Render Current Conditions Container
+    var currDateHour = dayjs().format("dddd, MMMM D, YYYY -- HH:00");
+    $(".current-city").text(selectedLocation.displayStr);
+    $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
+    $(".current-time").text(currDateHour);
+    $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)}\xB0F`);
+    $(".current-pop").text(`${Math.floor(forecast.list[0].pop * 100)}%`);
+    $(".current-clouds").text(`${forecast.list[0].clouds.all}%`);
+    $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
+    $(".current-humidity").text(`${forecast.list[0].main.humidity}%`);
+    var weatherIcon = forecast.list[0].weather[0].icon;  // Weather Condition (all weather is an array of length 1) => https://openweathermap.org/weather-conditions 
+    var iconUrl = `https://openweathermap.org./img/wn/${weatherIcon}@2x.png`;
+    $(".current-icon").attr('src', iconUrl);
+    $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
+
+    // Aggregate the Daily Forecasts
+    var forecastDataByHour = forecastData.list;  //forecast.list
+    var startDay = parseInt(dayjs().format('D'));
+    var dailyForecasts = [];
+    for(var i = startDay; i < (startDay + 5); i++){
+        
+        var aggDailyForecast = {date:``, icon:``, desc:``, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
+
+        // Filter the hourly data by day
+        var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
+        var forecastDate = dayjs.unix(forecastDataByDay[0].dt).format("ddd, MMM D");
+        aggDailyForecast.date = forecastDate;
+        
+        // Take the worst case Weather contition, these codes appear to be the worst at the lowest id value https://openweathermap.org/weather-conditions
+        var minWeaID = forecastDataByDay.sort((a,b) => a.weather[0].id - b.weather[0].id);
+        aggDailyForecast.icon = minWeaID[0].weather[0].icon;
+        aggDailyForecast.desc = minWeaID[0].weather[0].description;
+        
+        // Sort descending by temp_max and get high temp from first element
+        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
+
+        // Sort ascending by temp_min and get low temp from first element
+        var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
+        aggDailyForecast.low = Math.floor(minTemps[0].main.temp_min);
+
+        // Sort descending by precipitation% and get max percipitation% from first element
+        var maxPrec = forecastDataByDay.sort((a,b) => b.pop - a.pop);
+        aggDailyForecast.prec = Math.floor(maxPrec[0].pop * 100);
+
+        // Sort descending by cloud% and get max cloudiness from first element
+        var maxClds = forecastDataByDay.sort((a,b) => b.clouds.all - a.clouds.all);
+        aggDailyForecast.clds = Math.floor(maxClds[0].clouds.all);
+
+        // Sort descending by windspeed and get max wind from first element
+        var maxWind = forecastDataByDay.sort((a,b) => b.wind.speed - a.wind.speed);
+        aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
+
+        // Sort descending by humidity and get max humidity from first element
+        var maxHmd = forecastDataByDay.sort((a,b) => b.main.humidity - a.main.humidity);
+        aggDailyForecast.hmd = Math.floor(maxHmd[0].main.humidity);
+
+        console.log(aggDailyForecast);
+        dailyForecasts.push(aggDailyForecast);
+        
+    }
+
+    // Render 5-Day Forecast Container
+    $(".forecast-container").empty();
+    for(var i = 0; i < dailyForecasts.length; i++){
+        
+        // Card Body
+        var cardBodyEl = $('<div class="card-body">');
+        cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts[i].icon}.png`).attr('alt', dailyForecasts[i].desc) ); 
+        cardBodyEl.append( $('<h6 class="card-text">').text(`High_Temp: ${dailyForecasts[i].high}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Low_Temp: ${dailyForecasts[i].low}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Precipitation: ${dailyForecasts[i].prec}%`) );
+        // cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Clds: ${dailyForecasts[i].clds}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Wnd: ${dailyForecasts[i].wnd} mph`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Hmd: ${dailyForecasts[i].hmd}%`) );
+
+        // Card Info Div
+        var cardInfoDivEl = $('<div class="card h-100 border-dark">');
+        cardInfoDivEl.append( $('<h4 class="card-header">').text(dailyForecasts[i].date) );
+        cardInfoDivEl.append( cardBodyEl );
+
+        // Daily Forecast Card
+        var dailyForecastCardEl = $('<div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">');
+        dailyForecastCardEl.append(cardInfoDivEl);
+        $(".forecast-container").append(dailyForecastCardEl);
+    }
+
+}
+
 
 
 function renderLocationForm(geodata) {
@@ -128,6 +228,7 @@ function getWeatherForecast(selectedLocation) {
     .then(function (data) {
         console.log(data);
         forecastData = data;
+        renderForecast(selectedLocation, forecastData)
         saveToLocalStorage(selectedLocation);
     })
     .catch(error => {
@@ -135,6 +236,7 @@ function getWeatherForecast(selectedLocation) {
         alert(error);
     });
 }
+getWeatherForecast(initialWeatherLocation);
 
 
 locationSearchEl.on('submit', function(event){

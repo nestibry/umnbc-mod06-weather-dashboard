@@ -53,13 +53,13 @@
     
 
     <!-- Current Weather Report Container -->
-    <section class="pt-4 pb-4 bg-light">
+    <section class="p-2 pt-4 pb-4 bg-light">
         <div class="container">
             
             <!-- Current City Title Block -->
             <div class="mb-4">
-                <h1 class="current-city">Minneapolis, Minnesota, US</h1>
-                <h5 class="current-location">(latitude: 44.456 longitude: -91.123)</h5>
+                <h1 class="current-city">Minneapolis, Minnesota</h1>
+                <h5 class="current-location">(lat=44.9772995 lon=-93.2654692)</h5>
             </div>
 
             <!-- Current Conditions Container  -->
@@ -68,12 +68,15 @@
                     <!-- Current Weather Card  col-lg-6 -->
                     <div class="col-12 mb-3 current-weather">
                         <div class="card border-dark">
-                            <h4 class="card-header">Wednesday, October 18, 2023 -- 7:45AM</h4>
+                            <h3 class="card-header current-time">Current Date and Time</h3>
                             <div class="card-body">
-                            <p class="card-text">ICON</p>
-                            <p class="card-text">Temp: 70 F</p>
-                            <p class="card-text">Wind: 8.5 MPH</p>
-                            <p class="card-text">Humidity: 44%</p>
+                            <!-- <h5 class="card-text"><img class="current-icon" src="" alt="current-weather-icon"/></h5> -->
+                            <img class="card-text current-icon" src="" alt="current-weather-icon"/>
+                            <h5 class="card-text">Temperature: <span class="current-temp"></span></h5>
+                            <h5 class="card-text">Precipitation: <span class="current-pop"></span></h5>
+                            <h5 class="card-text">Cloud Cover: <span class="current-clouds"></span></h5>
+                            <h5 class="card-text">Wind Speed: <span class="current-wind"></span></h5>
+                            <h5 class="card-text">Humidity: <span class="current-humidity"></span></h5>
                             </div>
                         </div>
                     </div>
@@ -108,16 +111,24 @@
                 <!-- Daily Forecast Card -->
                 <div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">
                     <div class="card h-100 border-dark">
-                        <h4 class="card-header">Wednesday <br>October 18, 2023</h4>
+                        <h4 class="card-header">Current Date</h4>
                         <div class="card-body">
-                          <p class="card-text">ICON</p>
-                          <p class="card-text">High: 70 F</p>
-                          <p class="card-text">Low: 50 F</p>
-                          <p class="card-text">Wind: 8.5 MPH</p>
-                          <p class="card-text">Humidity: 44%</p>
+                          <h6 class="card-text">ICON</h6>
+                          <h6 class="card-text">High:</h6>
+                          <h6 class="card-text">Low:</h6>
+                          <h6 class="card-text">Prec:</h6>
+                          <h6 class="card-text">Clds:</h6>
+                          <h6 class="card-text">Wnd:</h6>
+                          <h6 class="card-text">Hmd:</h6>
                         </div>
                     </div>
                 </div>
+
+                
+
+            
+
+
 
             </div>
         </div>
