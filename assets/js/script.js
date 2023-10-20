@@ -13,6 +13,7 @@ var savedLocations = [];
 // Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
     savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
+    // savedLocations.sort((p1, p2) => (p1.displayStr > p2.displayStr) ? 1 : (p1.displayStr < p2.displayStr) ? -1 : 0);
 }
 readFromLocalStorage();
 
@@ -39,7 +40,8 @@ function saveToLocalStorage(selectedLocation) {
     
     // Refresh the savedLocations to compare against
     readFromLocalStorage();
-  
+    
+
     // new search string
     var newItem = {
         displayStr: selectedLocation.displayStr,
@@ -52,6 +54,8 @@ function saveToLocalStorage(selectedLocation) {
     var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.displayStr == newItem.displayStr).length === 0);
     if(isNewSearch){
         savedLocations.push(newItem);
+        var sortedLocations = savedLocations.sort((p1, p2) => (p1.displayStr > p2.displayStr) ? 1 : (p1.displayStr < p2.displayStr) ? -1 : 0);
+        savedLocations = sortedLocations;
         localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
         renderSavedLocations();
     } else {
