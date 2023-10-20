@@ -13,7 +13,6 @@ var savedLocations = [];
 // Local Storage Functions and Render Saved Locations
 function readFromLocalStorage() {  
     savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
-    // savedLocations.sort((p1, p2) => (p1.displayStr > p2.displayStr) ? 1 : (p1.displayStr < p2.displayStr) ? -1 : 0);
 }
 readFromLocalStorage();
 
@@ -41,7 +40,6 @@ function saveToLocalStorage(selectedLocation) {
     // Refresh the savedLocations to compare against
     readFromLocalStorage();
     
-
     // new search string
     var newItem = {
         displayStr: selectedLocation.displayStr,
