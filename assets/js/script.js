@@ -81,16 +81,51 @@ function renderForecast(selectedLocation, forecast){
     // Render 5-Day Forecast Container
     // <!-- Forecast Cards Container  -->
     //         <div class="row align-items-stretch justify-content-between forecast-container">
+
     //             <!-- Daily Forecast Card -->
     //             <div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">
     //                 <div class="card h-100 border-dark">
-    //                     <h4 class="card-header">Wednesday <br>October 18, 2023</h4>
+    //                     <h4 class="card-header">Wednesday <br>October 18</h4>
     //                     <div class="card-body">
-    //                       <p class="card-text">ICON</p>
-    //                       <p class="card-text">High: 70 F</p>
-    //                       <p class="card-text">Low: 50 F</p>
-    //                       <p class="card-text">Wind: 8.5 MPH</p>
-    //                       <p class="card-text">Humidity: 44%</p>
+    //                       <h6 class="card-text">ICON</h6>
+    //                       <h6 class="card-text">High:</h6>
+    //                       <h6 class="card-text">Low:</h6>
+    //                       <h6 class="card-text">Prec:</h6>
+    //                       <h6 class="card-text">Clds:</h6>
+    //                       <h6 class="card-text">Wnd:</h6>
+    //                       <h6 class="card-text">Hmd:</h6>
+    var dailyForecasts = {
+        list: [
+            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+            {date:"Friday October 20", icon:"sunny", high:"70F", low:"50F", prec:"25%", clds:"75%", wnd:"10mph",hmd:"95%"},
+        ],
+    }   
+
+    $(".forecast-container").empty();
+
+    for(var i = 0; i < 5; i++){
+        
+        // Card Body
+        var cardBodyEl = $('<div class="card-body">');
+        var iconEl = $('<h6 class="card-text">');
+        iconEl.text(dailyForecasts.list[i].icon);
+        cardBodyEl.append(iconEl);
+
+        // Card Info Div
+        var cardInfoDivEl = $('<div class="card h-100 border-dark">');
+        var dateEl = $('<h4 class="card-header">');
+        dateEl.text(dailyForecasts.list[i].date);
+        cardInfoDivEl.append(dateEl);
+        cardInfoDivEl.append(cardBodyEl);
+
+        // Daily Forecast Card
+        var dailyForecastCardEl = $('<div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">');
+        dailyForecastCardEl.append(cardInfoDivEl);
+        $(".forecast-container").append(dailyForecastCardEl);
+    }
    
 
 
