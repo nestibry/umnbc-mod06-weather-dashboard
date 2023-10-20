@@ -63,7 +63,7 @@ function saveToLocalStorage(selectedLocation) {
 
 function renderForecast(selectedLocation, forecast){
 
-    // Render Current Conditions Section
+    // Render Current Conditions Container
     var currDateHour = dayjs().format("dddd, MMMM D, YYYY -- HH:00");
     $(".current-city").text(selectedLocation.displayStr);
     $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
@@ -73,12 +73,30 @@ function renderForecast(selectedLocation, forecast){
     $(".current-clouds").text(`${forecast.list[0].clouds.all}%`);
     $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
     $(".current-humidity").text(`${forecast.list[0].main.humidity}%`);
-
-    // Weather Condition (all weather is an array of length 1) => https://openweathermap.org/weather-conditions 
-    var weatherIcon = forecast.list[0].weather[0].icon;
+    var weatherIcon = forecast.list[0].weather[0].icon;  // Weather Condition (all weather is an array of length 1) => https://openweathermap.org/weather-conditions 
     var iconUrl = `https://openweathermap.org./img/wn/${weatherIcon}@2x.png`;
     $(".current-icon").attr('src', iconUrl);
     $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
+
+    // Render 5-Day Forecast Container
+    // <!-- Forecast Cards Container  -->
+    //         <div class="row align-items-stretch justify-content-between forecast-container">
+
+    //             <!-- Daily Forecast Card -->
+    //             <div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">
+    //                 <div class="card h-100 border-dark">
+    //                     <h4 class="card-header">Wednesday <br>October 18, 2023</h4>
+    //                     <div class="card-body">
+    //                       <p class="card-text">ICON</p>
+    //                       <p class="card-text">High: 70 F</p>
+    //                       <p class="card-text">Low: 50 F</p>
+    //                       <p class="card-text">Wind: 8.5 MPH</p>
+    //                       <p class="card-text">Humidity: 44%</p>
+    //                     </div>
+    //                 </div>
+    //             </div>
+
+    //         </div>
 
 
 }
