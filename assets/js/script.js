@@ -160,7 +160,6 @@ locationSearchEl.on('submit', function(event){
     // Future To-dos
     //  : Need a modal to do City input, State input, Country input, ZIP Code input
     //  : Add capability to check valid input AND can't be empty
-    //  : Add capability to choose from a list of city inputs otherwise throw an error (e.g., Minneapolis,Minnesota,US; Minneapolis,Kansas,US; Minneapolis,etc,US;)
 
     // Check if the input is a City or Zipcode
     if( isNaN( parseInt(locationInput) ) ){
