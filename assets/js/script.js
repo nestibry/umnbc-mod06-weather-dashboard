@@ -124,27 +124,9 @@ function renderForecast(selectedLocation, forecast){
         dailyForecasts.push(aggDailyForecast);
         
     }
- // var newDay = {
-        //     date: i,
-        //     list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
-        // };
-        // forecastDataByDay.push( newDay );
-// var dailyForecastList = forecastData.list.filter( forecastData.list => parseInt(dayjs.unix(forecastData.list.dt).format("D")) === 20 )
-    // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
-    // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
-    // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
 
     // Render 5-Day Forecast Container
-    // var dailyForecasts = [
-    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    //     {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    // ];
-
     $(".forecast-container").empty();
-
     for(var i = 0; i < dailyForecasts.length; i++){
         
         // Card Body
