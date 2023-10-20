@@ -69,9 +69,10 @@ function renderForecast(selectedLocation, forecast){
     $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
     $(".current-time").text(currDateTime);
     $(".current-icon").text(``);
-    $(".current-temp").text(``);
-    $(".current-pop").text(``);
-    $(".current-humidity").text(``);
+    $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)} \xB0F`);
+    $(".current-pop").text(`${Math.floor(forecast.list[0].pop * 100)}%`);
+    $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
+    $(".current-humidity").text(`${forecast.list[0].main.humidity}%`);
 
 
 
