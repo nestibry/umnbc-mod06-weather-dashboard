@@ -89,7 +89,7 @@ function renderForecast(selectedLocation, forecast){
 
         // Filter the hourly data by day
         var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
-        var forecastDate = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMM D");
+        var forecastDate = dayjs.unix(forecastDataByDay[0].dt).format("ddd, MMM D");
         aggDailyForecast.date = forecastDate;
         
         // Take the worst case Weather contition, these codes appear to be the worst at the lowest id value https://openweathermap.org/weather-conditions
