@@ -61,6 +61,7 @@ function saveToLocalStorage(selectedLocation) {
 }
 
 
+
 function renderForecast(selectedLocation, forecast){
 
     // Render Current Conditions Container
@@ -91,7 +92,9 @@ function renderForecast(selectedLocation, forecast){
         var forecastDate = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
         aggDailyForecast.date = forecastDate;
         
-        // Sort icons and tally up most frequent icon to display
+        // Take the worst case Weather contition, these codes appear to be the worst at the lowest id value https://openweathermap.org/weather-conditions
+        var minWeaID = forecastDataByDay.sort((a,b) => a.weather[0].id - b.weather[0].id);
+        aggDailyForecast.icon = minWeaID[0].weather[0].icon;
         
         // Sort descending by temp_max and get high temp from first element
         var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
