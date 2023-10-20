@@ -120,7 +120,7 @@ function renderForecast(selectedLocation, forecast){
         var maxHmd = forecastDataByDay.sort((a,b) => b.main.humidity - a.main.humidity);
         aggDailyForecast.hmd = Math.floor(maxHmd[0].main.humidity);
 
-        // console.log(aggDailyForecast);
+        console.log(aggDailyForecast);
         dailyForecasts.push(aggDailyForecast);
         
     }
