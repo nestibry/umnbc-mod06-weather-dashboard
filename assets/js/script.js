@@ -64,6 +64,7 @@ function saveToLocalStorage(selectedLocation) {
     } 
 
 }
+saveToLocalStorage(initialWeatherLocation);
 
 
 
