@@ -118,6 +118,7 @@ function getWeatherForecast(selectedLocation) {
 
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${selectedLocation.queryStr}&units=imperial&appid=${apiKey}`;
+    console.log(`Get Weather Forecast: ${selectedLocation.displayStr}, ${selectedLocation.queryStr}`);
     console.log(baseUrl);
 
     fetch(baseUrl)
