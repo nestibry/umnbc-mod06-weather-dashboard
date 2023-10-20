@@ -93,6 +93,16 @@ function renderForecast(selectedLocation, forecast){
     // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
     // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
     // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
+    var forecastDataByHour = forecastData.list;
+    var forecastDataByDay = [];
+    
+    for(var i = 20; i < 25; i++){
+        var newDay = {
+            date: i,
+            list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
+        };
+        forecastDataByDay.push( newDay );
+    }
 
     // Render 5-Day Forecast Container
     $(".forecast-container").empty();
