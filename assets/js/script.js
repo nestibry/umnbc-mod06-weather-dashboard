@@ -15,29 +15,6 @@ function readFromLocalStorage() {
     // savedLocations = JSON.parse(localStorage.getItem('WeatherDashboardLocations')) || [];
     savedLocations = JSON.parse(localStorage.getItem('weather-dashboard-locations')) || [];
 }
-readFromLocalStorage();
-
-function saveToLocalStorage(selectedLocation) {
-    readFromLocalStorage();
-  
-    // new search string
-    var newItem = {
-        displayStr: selectedLocation.displayStr,
-        queryStr: selectedLocation.queryStr,
-    }
-    console.log(`call within saveToLocalStorage():`)
-    console.log(newItem);
-
-    // Compare to existing and only add new unique searches
-    var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.queryStr == newItem.queryStr).length === 0);
-    if(isNewSearch){
-        savedLocations.push(newItem);
-        localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
-    } else {
-        console.log("Not a new unique search...");
-    }
-
-}
 
 function renderSavedLocations() {
 
@@ -60,6 +37,31 @@ function renderSavedLocations() {
     }
 }
 renderSavedLocations();
+
+function saveToLocalStorage(selectedLocation) {
+    readFromLocalStorage();
+  
+    // new search string
+    var newItem = {
+        displayStr: selectedLocation.displayStr,
+        queryStr: selectedLocation.queryStr,
+    }
+    console.log(`call within saveToLocalStorage():`)
+    console.log(newItem);
+
+    // Compare to existing and only add new unique searches
+    var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.queryStr == newItem.queryStr).length === 0);
+    if(isNewSearch){
+        savedLocations.push(newItem);
+        renderSavedLocations();
+        localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
+    } else {
+        console.log("Not a new unique search...");
+    }
+
+}
+
+
 
 
 function renderLocationForm(geodata) {
