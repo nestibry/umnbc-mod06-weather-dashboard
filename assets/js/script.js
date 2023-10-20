@@ -47,9 +47,7 @@ function saveToLocalStorage(selectedLocation) {
         displayStr: selectedLocation.displayStr,
         queryStr: selectedLocation.queryStr,
     }
-    console.log(`call within saveToLocalStorage():`)
-    console.log(newItem);
-
+    
     // Compare to existing and only add new unique searches
     var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.displayStr == newItem.displayStr).length === 0);
     if(isNewSearch){
@@ -58,10 +56,8 @@ function saveToLocalStorage(selectedLocation) {
         savedLocations = sortedLocations;
         localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
         renderSavedLocations();
-    } else {
-        console.log("Not a new unique search...");
-    }
-
+    } 
+    
 }
 
 
