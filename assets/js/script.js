@@ -57,7 +57,7 @@ function saveToLocalStorage(selectedLocation) {
         localStorage.setItem('weather-dashboard-locations', JSON.stringify(savedLocations)); 
         renderSavedLocations();
     } 
-    
+
 }
 
 
@@ -66,6 +66,7 @@ function renderLocationForm(geodata) {
     // Clear the testApiSection to get ready for the new rendering
     cityInputEl.empty();
     console.log(`Rendering Location Form:`)
+    console.log(geodata);
 
     // render locations to choose from
     for(var i = 0; i < geodata.length; i++) {
@@ -73,7 +74,6 @@ function renderLocationForm(geodata) {
         locationOptionEl.val(geodata[i].queryStr);
         locationOptionEl.text(geodata[i].displayTxt);
         cityInputEl.append(locationOptionEl);
-        console.log(`${geodata[i].displayTxt} => ${geodata[i].queryStr}`);
     }
 }
 
@@ -85,11 +85,9 @@ function fetchGeocode(geolocation) {
         return response.json();
     })
     .then(function (geodata) {
-        console.log(geodata);
-
-        var geoData = [];
-        
+              
         // Prepare data for Rendering Location Form
+        var geoData = [];
         if(geolocation.type === 'city'){
             for(var i = 0; i < geodata.length; i++){
                 var newLoc = {
