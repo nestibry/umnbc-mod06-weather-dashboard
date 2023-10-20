@@ -176,7 +176,7 @@ locationSearchEl.on('submit', function(event){
     if( isNaN( parseInt(locationInput) ) ){
         
         // Geocoding by City, (State), Country Code
-        var city = locationInput; 
+        var city = locationInput + ",US"; 
         var geolocation = {
             type: 'city',
             url: `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`, 
@@ -197,22 +197,19 @@ locationSearchEl.on('submit', function(event){
         fetchGeocode(geolocation);
 
     } else {
-        
-        
         // Manually need to minimize the modal 
         closeForm = true;
         console.log(`Location Error: ${locationInput} is not a city or zipcode.Please try your search again.`);
         alert(`Location Error: "${locationInput}" is not a city or zipcode. \nPlease try your search again.`);
-        
     }
-
 });
+
 
 $( "#choose-city-modal" ).on('shown.bs.modal', function(event){
     event.preventDefault();
     event.stopPropagation();
     
-    // If manually need to minimize the modal
+    // Manually close modal if needed
     if(closeForm){
         $('#choose-city-modal').modal('toggle');
         closeForm = false;
