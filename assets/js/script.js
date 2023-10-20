@@ -110,8 +110,8 @@ function renderForecast(selectedLocation, forecast){
         aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
 
         // Sort descending by windspeed and get max wind from first element
-        // var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        // aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
+        var maxWind = forecastDataByDay.sort((a,b) => b.wind.speed - a.wind.speed);
+        aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
 
         // Sort descending by humidity and get max humidity from first element
         // var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
