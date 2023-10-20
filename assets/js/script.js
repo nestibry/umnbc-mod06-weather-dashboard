@@ -79,36 +79,48 @@ function renderForecast(selectedLocation, forecast){
     $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
 
     // Aggregate the Daily Forecasts
-    var dailyForecasts = [
-            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-            {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
-    ];
-     
-
-    // var dailyForecastList = forecastData.list.filter( forecastData.list => parseInt(dayjs.unix(forecastData.list.dt).format("D")) === 20 )
-    // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
-    // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
-    // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
     var forecastDataByHour = forecastData.list;  //forecast.list
-    var forecastDataByDay = [];
-
     var startDay = parseInt(dayjs().format('D'));
-    
     for(var i = startDay; i < (startDay + 5); i++){
         
-        var forecastDataByDay = [];
+        var aggDailyForecast = {date:``, icon:``, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
+
+        // Filter the hourly data by day
+        var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
+        var forecastDay = dayjs.unix(forecastDataByDay[0].dt).format("dddd, MMMM D");
+        aggDailyForecast.date = forecastDay;
+    
+        // Sort descending by temp_max and get high temp from first element
+        var minTemps = forecastDataByDay.sort((a,b) => a.main.temp_min - b.main.temp_min);
+        console.log(`low temp: ${minTemps[0].main.temp_min}`);
+
+        // Sort ascending by temp_min and get low temp from first element
+        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        console.log(maxTemps);
+        console.log(`high temp: ${maxTemps[0].main.temp_max}`);
+
+        console.log(aggDailyForecast);
         
-        // var newDay = {
+    }
+ // var newDay = {
         //     date: i,
         //     list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
         // };
         // forecastDataByDay.push( newDay );
-    }
+// var dailyForecastList = forecastData.list.filter( forecastData.list => parseInt(dayjs.unix(forecastData.list.dt).format("D")) === 20 )
+    // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
+    // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
+    // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
 
     // Render 5-Day Forecast Container
+    var dailyForecasts = [
+        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+        {date:`Friday Oct 20`, icon:"02d", high:"70", low:"50", prec:"25", clds:"75", wnd:"10",hmd:"95"},
+    ];
+
     $(".forecast-container").empty();
 
     for(var i = 0; i < dailyForecasts.length; i++){
