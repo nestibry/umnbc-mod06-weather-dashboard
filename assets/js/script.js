@@ -61,12 +61,12 @@ function saveToLocalStorage(selectedLocation) {
 }
 
 
-function renderForecast(selectedLocation){
+function renderForecast(selectedLocation, forecast){
 
     // Render Current Conditions Section
     $(".current-city").text(selectedLocation.displayStr);
     $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
-    
+
 
 }
 
@@ -139,7 +139,7 @@ function getWeatherForecast(selectedLocation) {
     .then(function (data) {
         console.log(data);
         forecastData = data;
-        renderForecast(selectedLocation)
+        renderForecast(selectedLocation, forecastData)
         saveToLocalStorage(selectedLocation);
     })
     .catch(error => {
