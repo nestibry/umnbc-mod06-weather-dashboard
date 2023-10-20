@@ -141,7 +141,7 @@ function renderForecast(selectedLocation, forecast){
         cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts[i].icon}.png`).attr('alt', dailyForecasts[i].desc) ); 
         cardBodyEl.append( $('<h6 class="card-text">').text(`High_Temp: ${dailyForecasts[i].high}\xB0F`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Low_Temp: ${dailyForecasts[i].low}\xB0F`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Precip: ${dailyForecasts[i].prec}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Precipitation: ${dailyForecasts[i].prec}%`) );
         // cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Clds: ${dailyForecasts[i].clds}%`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Wnd: ${dailyForecasts[i].wnd} mph`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Hmd: ${dailyForecasts[i].hmd}%`) );
