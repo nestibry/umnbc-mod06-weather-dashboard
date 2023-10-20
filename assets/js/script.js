@@ -118,16 +118,11 @@ function renderForecast(selectedLocation, forecast){
         cardBodyEl.append( $('<h6 class="card-text">').text(`Wnd: ${dailyForecasts.list[i].wnd} mph`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Hmd: ${dailyForecasts.list[i].hmd}%`) );
 
-        // var iconEl = $('<img class="card-text">');
-        // iconEl.attr('src', `https://openweathermap.org./img/wn/${dailyForecasts.list[i].icon}@2x.png`);
-        // cardBodyEl.append(iconEl);
-
         // Card Info Div
         var cardInfoDivEl = $('<div class="card h-100 border-dark">');
-        var dateEl = $('<h4 class="card-header">');
-        dateEl.text(dailyForecasts.list[i].date);
-        cardInfoDivEl.append(dateEl);
-        cardInfoDivEl.append(cardBodyEl);
+        cardInfoDivEl.append( $('<h4 class="card-header">').text(dailyForecasts.list[i].date) );
+        cardInfoDivEl.append( cardBodyEl );
+     
 
         // Daily Forecast Card
         var dailyForecastCardEl = $('<div class="col-12 col-lg-2 mb-3 flex-grow-1 forecast-card">');
