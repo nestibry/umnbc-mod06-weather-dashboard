@@ -85,7 +85,7 @@ function renderForecast(selectedLocation, forecast){
     var dailyForecasts = [];
     for(var i = startDay; i < (startDay + 5); i++){
         
-        var aggDailyForecast = {date:``, icon:`02d`, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
+        var aggDailyForecast = {date:``, icon:``, desc:``, high:``, low:``, prec:``, clds:``, wnd:``,hmd:``};
 
         // Filter the hourly data by day
         var forecastDataByDay = forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === i );
@@ -95,6 +95,7 @@ function renderForecast(selectedLocation, forecast){
         // Take the worst case Weather contition, these codes appear to be the worst at the lowest id value https://openweathermap.org/weather-conditions
         var minWeaID = forecastDataByDay.sort((a,b) => a.weather[0].id - b.weather[0].id);
         aggDailyForecast.icon = minWeaID[0].weather[0].icon;
+        aggDailyForecast.desc = minWeaID[0].weather[0].description;
         
         // Sort descending by temp_max and get high temp from first element
         var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
@@ -131,7 +132,7 @@ function renderForecast(selectedLocation, forecast){
         
         // Card Body
         var cardBodyEl = $('<div class="card-body">');
-        cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts[i].icon}.png`) ); 
+        cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts[i].icon}.png`).attr('alt', dailyForecasts[i].desc) ); 
         cardBodyEl.append( $('<h6 class="card-text">').text(`High_Temp: ${dailyForecasts[i].high}\xB0F`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Low_Temp: ${dailyForecasts[i].low}\xB0F`) );
         cardBodyEl.append( $('<h6 class="card-text">').text(`Precip: ${dailyForecasts[i].prec}%`) );
@@ -149,8 +150,6 @@ function renderForecast(selectedLocation, forecast){
         dailyForecastCardEl.append(cardInfoDivEl);
         $(".forecast-container").append(dailyForecastCardEl);
     }
-   
-
 
 }
 
