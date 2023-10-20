@@ -102,19 +102,20 @@ function renderForecast(selectedLocation, forecast){
         aggDailyForecast.low = Math.floor(minTemps[0].main.temp_min);
 
         // Sort descending by precipitation% and get max percipitation% from first element
-        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
+        var maxPrec = forecastDataByDay.sort((a,b) => b.pop - a.pop);
+        aggDailyForecast.prec = Math.floor(maxPrec[0].pop * 100);
 
         // Sort descending by cloud% and get max cloudiness from first element
-        var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
-        aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
+        var maxWind = forecastDataByDay.sort((a,b) => b.wind.speed - a.wind.speed);
+        aggDailyForecast.wnd = Math.floor(maxWind[0].wind.speed);
 
         // Sort descending by windspeed and get max wind from first element
+        // var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        // aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
 
         // Sort descending by humidity and get max humidity from first element
-
-        
-        
+        // var maxTemps = forecastDataByDay.sort((a,b) => b.main.temp_max - a.main.temp_max);
+        // aggDailyForecast.high = Math.floor(maxTemps[0].main.temp_max);
 
         console.log(aggDailyForecast);
         dailyForecasts.push(aggDailyForecast);
@@ -146,12 +147,12 @@ function renderForecast(selectedLocation, forecast){
         // Card Body
         var cardBodyEl = $('<div class="card-body">');
         cardBodyEl.append( $('<img class="card-text">').attr('src', `https://openweathermap.org./img/wn/${dailyForecasts[i].icon}.png`) ); 
-        cardBodyEl.append( $('<h6 class="card-text">').text(`High: ${dailyForecasts[i].high}\xB0F`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Low: ${dailyForecasts[i].low}\xB0F`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Prec: ${dailyForecasts[i].prec}%`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Clds: ${dailyForecasts[i].clds}%`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Wnd: ${dailyForecasts[i].wnd} mph`) );
-        cardBodyEl.append( $('<h6 class="card-text">').text(`Hmd: ${dailyForecasts[i].hmd}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`High_Temp: ${dailyForecasts[i].high}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Low_Temp: ${dailyForecasts[i].low}\xB0F`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Prec: ${dailyForecasts[i].prec}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Clds: ${dailyForecasts[i].clds}%`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Wnd: ${dailyForecasts[i].wnd} mph`) );
+        cardBodyEl.append( $('<h6 class="card-text">').text(`Max_Hmd: ${dailyForecasts[i].hmd}%`) );
 
         // Card Info Div
         var cardInfoDivEl = $('<div class="card h-100 border-dark">');
