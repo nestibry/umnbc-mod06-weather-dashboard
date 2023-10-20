@@ -98,11 +98,14 @@ function renderForecast(selectedLocation, forecast){
     var startDay = parseInt(dayjs().format('D'));
     
     for(var i = startDay; i < (startDay + 5); i++){
-        var newDay = {
-            date: i,
-            list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
-        };
-        forecastDataByDay.push( newDay );
+        
+        var forecastDataByDay = [];
+        
+        // var newDay = {
+        //     date: i,
+        //     list: forecastDataByHour.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 ),
+        // };
+        // forecastDataByDay.push( newDay );
     }
 
     // Render 5-Day Forecast Container
