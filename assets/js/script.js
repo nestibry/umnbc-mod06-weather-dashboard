@@ -70,6 +70,7 @@ function renderForecast(selectedLocation, forecast){
     $(".current-time").text(currDateHour);
     $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)} \xB0F`);
     $(".current-pop").text(`${Math.floor(forecast.list[0].pop * 100)}%`);
+    $(".current-clouds").text(`${forecast.list[0].clouds.all}%`);
     $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
     $(".current-humidity").text(`${forecast.list[0].main.humidity}%`);
 
