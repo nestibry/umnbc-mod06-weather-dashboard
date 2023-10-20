@@ -220,25 +220,16 @@ $( "#choose-city-modal" ).on('shown.bs.modal', function(event){
 });
 
 
-
 cityFormEl.on('submit', function(event){
     
     event.preventDefault();
     event.stopPropagation();
 
-    // var selectedDisplayStr = $("#city-input option:selected").text();
-    // var selectedQueryStr= $("#city-input option:selected").val();
     var selectedLocation = {
         displayStr: $("#city-input option:selected").text(),
         queryStr: $("#city-input option:selected").val(),
     }
-    
-    // console.log(selectedDisplayStr);
-    // console.log(selectedQueryStr);
-    console.log(selectedLocation);
-
     getWeatherForecast(selectedLocation);
-
 });
 
 
@@ -247,14 +238,10 @@ dropdownMenuEl.on('click', '.dropdown-item', function(event){
     event.preventDefault();
     event.stopPropagation();
 
-    // Location Search from dropdown
-    
     var selectedLocation = {
         displayStr: $(this).text(),
         queryStr: $(this).attr('data-query-str'),
     }
-    
     getWeatherForecast(selectedLocation);
-    
 });
 
