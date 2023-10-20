@@ -95,13 +95,10 @@ function fetchGeocode(geolocation) {
         var geoData = [];
         
         // Prepare data for Rendering Location Form
-        // queryString, lat, lon, displayText (city, state or city, zip)
         if(geolocation.type === 'city'){
             for(var i = 0; i < geodata.length; i++){
                 var newLoc = {
                     queryStr: `lat=${geodata[i].lat}&lon=${geodata[i].lon}`,
-                    lat: geodata[i].lat,
-                    lon: geodata[i].lon,
                     displayTxt: `${geodata[i].name}, ${geodata[i].state}`,
                 };
                 geoData.push(newLoc);
@@ -110,13 +107,10 @@ function fetchGeocode(geolocation) {
         else if(geolocation.type === 'zip') {
                 var newLoc = {
                     queryStr: `lat=${geodata.lat}&lon=${geodata.lon}`,
-                    lat: geodata.lat,
-                    lon: geodata.lon,
                     displayTxt: `${geodata.name}, ${geodata.zip}`,
                 };
                 geoData.push(newLoc);
         }
-        console.log(geoData);
         renderLocationForm(geoData);
 
     })
