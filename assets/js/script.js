@@ -64,10 +64,10 @@ function saveToLocalStorage(selectedLocation) {
 function renderForecast(selectedLocation, forecast){
 
     // Render Current Conditions Section
-    var currDateTime = dayjs().format("dddd, MMMM D, YYYY -- HH:mm");
+    var currDateHour = dayjs().format("dddd, MMMM D, YYYY -- HH:00");
     $(".current-city").text(selectedLocation.displayStr);
     $(".current-location").text(`(${selectedLocation.queryStr.replace('&', '  ')})`);
-    $(".current-time").text(currDateTime);
+    $(".current-time").text(currDateHour);
     $(".current-icon").text(``);
     $(".current-temp").text(`${Math.floor(forecast.list[0].main.temp)} \xB0F`);
     $(".current-pop").text(`${Math.floor(forecast.list[0].pop * 100)}%`);
