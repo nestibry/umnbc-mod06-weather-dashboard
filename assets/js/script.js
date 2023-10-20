@@ -89,7 +89,8 @@ function renderForecast(selectedLocation, forecast){
         ],
     }   
 
-    // var dailyForecastList = forecastData.list.filter( forecastData.list => (parseInt(dayjs.unix(forecastData.list[0].dt).format("D")) === 20) )
+    // var dailyForecastList = forecastData.list.filter( forecastData.list => parseInt(dayjs.unix(forecastData.list.dt).format("D")) === 20 )
+    // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
 
     // Render 5-Day Forecast Container
     $(".forecast-container").empty();
