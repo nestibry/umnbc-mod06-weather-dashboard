@@ -91,6 +91,8 @@ function renderForecast(selectedLocation, forecast){
 
     // var dailyForecastList = forecastData.list.filter( forecastData.list => parseInt(dayjs.unix(forecastData.list.dt).format("D")) === 20 )
     // forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
+    // var dailyForecasts = forecastHourlyList.filter( hourlyData => parseInt(dayjs.unix(hourlyData.dt).format("D")) === 20 )
+    // var lowTemps = dailyForecasts.sort((a,b) => a.main.temp - b.main.temp)
 
     // Render 5-Day Forecast Container
     $(".forecast-container").empty();
