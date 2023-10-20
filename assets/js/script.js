@@ -19,12 +19,14 @@ readFromLocalStorage();
 
 function saveToLocalStorage(selectedLocation) {
     readFromLocalStorage();
-
+  
     // new search string
     var newItem = {
         displayStr: selectedLocation.displayStr,
-        queryStr: selectedLocation.queryString,
+        queryStr: selectedLocation.queryStr,
     }
+    console.log(`call within saveToLocalStorage():`)
+    console.log(newItem);
 
     // Compare to existing and only add new unique searches
     var isNewSearch = (savedLocations.filter(savedLocations => savedLocations.queryStr == newItem.queryStr).length === 0);
@@ -124,7 +126,8 @@ function fetchGeocode(geolocation) {
 function getWeatherForecast(selectedLocation) {
 
     var locationCoords = selectedLocation.queryStr;
-
+    console.log(`getWetherForecast():`)
+    console.log(selectedLocation);
     // OpenWeather API 5-day/3-hour Weather Forecasting
     var baseUrl = `https://api.openweathermap.org/data/2.5/forecast?${locationCoords}&units=imperial&appid=${apiKey}`;
     console.log(baseUrl);
@@ -136,6 +139,8 @@ function getWeatherForecast(selectedLocation) {
     .then(function (data) {
         console.log(data);
         forecastData = data;
+        console.log(`call to saveToLocalStorage():`)
+        console.log(selectedLocation);
         saveToLocalStorage(selectedLocation);
     })
     .catch(error => {
@@ -218,15 +223,16 @@ cityFormEl.on('submit', function(event){
     event.preventDefault();
     event.stopPropagation();
 
+    // var selectedDisplayStr = $("#city-input option:selected").text();
+    // var selectedQueryStr= $("#city-input option:selected").val();
     var selectedLocation = {
         displayStr: $("#city-input option:selected").text(),
         queryStr: $("#city-input option:selected").val(),
     }
-    // var selectedCity = $("#city-input option:selected").text();
-    // var selectedCoords = $("#city-input option:selected").val();
     
-    console.log(selectedLocation.displayStr);
-    console.log(selectedLocation.queryStr);
+    // console.log(selectedDisplayStr);
+    // console.log(selectedQueryStr);
+    console.log(selectedLocation);
 
     getWeatherForecast(selectedLocation);
 
