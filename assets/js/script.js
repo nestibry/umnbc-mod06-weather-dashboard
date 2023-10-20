@@ -175,7 +175,7 @@ locationSearchEl.on('submit', function(event){
     // Check if the input is a City or Zipcode
     if( isNaN( parseInt(locationInput) ) ){
         
-        // Geocoding by City, (State), Country Code
+        // Geocoding by City, (State), Country Code for US Cities only
         var city = locationInput + ",US"; 
         var geolocation = {
             type: 'city',
