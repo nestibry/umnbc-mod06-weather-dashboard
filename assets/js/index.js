@@ -81,7 +81,7 @@ function renderForecast(selectedLocation, forecast){
     $(".current-wind").text(`${Math.floor(forecast.list[0].wind.speed)} mph`);
     $(".current-humidity").text(`${forecast.list[0].main.humidity}%`);
     var weatherIcon = forecast.list[0].weather[0].icon;  // Weather Condition (all weather is an array of length 1) => https://openweathermap.org/weather-conditions 
-    var iconUrl = `https://openweathermap.org./img/wn/${weatherIcon}@2x.png`;
+    var iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
     $(".current-icon").attr('src', iconUrl);
     $(".current-icon").attr('alt', forecast.list[0].weather[0].main);
 
